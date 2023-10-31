@@ -71,7 +71,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 	   	String tenderType = "Open Tender";
 		String formContract = "Supply";
 		String noOfPackets = "2";
-		String tenderCategory = "Works";
+		String tenderCategory = "Services";
 		String bidOpenerType = "1";
 	  	 
 		Properties prop = new Properties();
@@ -145,9 +145,8 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		selection(driver.findElement(By.name("noOfPackets")), "ByValue", noOfPackets);
 		selection(driver.findElement(By.name("tenderCategory")), "ByVisibleText",tenderCategory );
 		selection(driver.findElement(By.name("bidOpenerType")), "ByIndex", bidOpenerType);
-			
-		/*
 		try {
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			driver.findElement(By.xpath("(//input[@value='1'])")).click();
 		} catch (NoSuchElementException e) {
 		
@@ -156,12 +155,13 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		}
 		
 		try {
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			driver.findElement(By.id("multiCurYes")).click();
 		} catch (NoSuchElementException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Multicurrency is Disabled");;
+			System.out.println("Multicurrency is Disabled");
 		}
-		*/
+		
 		
 		try {
 			driver.findElement(By.id("Next")).click();
@@ -191,7 +191,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			driver.findElement(By.id("DirectLink_2")).click();
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.findElement(By.id("Next")).click();
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			Thread.sleep(200);
 			System.out.println("Sucessful - Cover details");
 		} catch (Exception e3) {
 			// TODO Auto-generated catch block
@@ -202,15 +202,16 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		// NIT Document
 		try
 		{
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);	
 		if (driver.findElement(By.id("DirectLink_2")).isDisplayed())
 		{ Thread.sleep(1000);
-		/*driver.findElement(By.id("DirectLink_2")).click();
+		driver.findElement(By.id("DirectLink_2")).click();
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		driver.findElement(By.id("description")).sendKeys("NIT");
 		UploadNit();
 		Thread.sleep(1000);
 		driver.findElement(By.id("save")).click();
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);*/
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		driver.findElement(By.id("DirectLink_0")).click();
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		driver.findElement(By.id("checkbox4")).click();
@@ -613,17 +614,17 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 	}
 	public static void Robot1() throws AWTException {
 		Robot robot = new Robot();
-		robot.mouseMove(570, 530);
+		robot.mouseMove(480, 515);
 		robot.delay(1500);
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-		robot.delay(1000);
+		robot.delay(3000);
 		robot.mouseMove(276, 156);
 		robot.delay(1500);
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-		robot.delay(1000);
-		robot.mouseMove(570, 510);
+		robot.delay(2000);
+		robot.mouseMove(465, 485);
 		robot.delay(3000);
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);

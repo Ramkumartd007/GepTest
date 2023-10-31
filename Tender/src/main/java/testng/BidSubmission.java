@@ -52,7 +52,7 @@ public class BidSubmission extends BaseClass {
 		Thread.sleep(2000);
 		driver.findElement(By.id("login")).click(); 
 		Thread.sleep(2000);
-		String Tenderid = "2023_NICT_9815_1";
+		String Tenderid = "2023_NICT_9824_1";
 		try {  
 			while(driver.findElement(By.id("UserName")).isDisplayed())
 			{
@@ -287,7 +287,7 @@ public class BidSubmission extends BaseClass {
 								System.out.println(Expected);
 								
 								Boolean x = Expected.contains("Yes");
-								Boolean y = Expected.contains("");
+								Boolean y = Expected.contains("".trim());
 								try {
 									
 									if (x)
@@ -577,7 +577,7 @@ public class BidSubmission extends BaseClass {
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 		robot.delay(3000);
 		
-		setClipboardData("C:\\Users\\91991\\Documents\\testing.pdf");	
+		setClipboardData("C:\\Users\\admin\\Documents\\TenderDocument.pdf");	
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);

@@ -64,7 +64,7 @@ public class BidOpenig extends BaseClass {
 	   String timer60 = String.valueOf(timemr-60);
 	   String timer560 = String.valueOf(timemr5-60);
 	  	 
-	    String Tenderid = "2023_NICT_9808_1";
+	    String Tenderid = "2023_NICT_9824_1";
 	  	
 	  	 
 		Properties prop = new Properties();
@@ -198,20 +198,24 @@ public class BidOpenig extends BaseClass {
 			Thread.sleep(300);
 			System.out.println("SL.NO: "+i);
 			
+// GTE			
 			try {
-			driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+i+"]/td[4]/a")).click(); Thread.sleep(200);
-			driver.findElement(By.id("submit")).click(); 
-			
-		
-			
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				if(driver.findElement(By.xpath("//td[text() = 'GTE']")).isDisplayed()) {
+			driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+i+"]/td[4]/a[@title='General Technical Evaluation']")).click(); Thread.sleep(200);
+			driver.findElement(By.id("reject")).click(); Thread.sleep(200);
+			driver.findElement(By.id("Save")).click(); 
+					}
 			} catch (NoSuchElementException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.out.println("No Preferential bidder");
+				System.out.println("No GTE");
 			
 			}
+			
+// Avail Preferential bidder			
 			try {
-				driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+i+"]/td[5]/a")).click(); Thread.sleep(200);
 				driver.findElement(By.xpath("//input[@class ='customButton']")).click(); driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 				driver.findElement(By.id("save")).click();
