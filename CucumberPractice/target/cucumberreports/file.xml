@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="11.817">
+    <testcase classname="login functionality of application" name="user login facebook application" time="11.394">
+        <system-out><![CDATA[Given user launch the application from chrome browser.......................passed
+When user enter the below details...........................................passed
+Then user clicked the login button..........................................passed
+]]></system-out>
+    </testcase>
+</testsuite>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-08-30T22:07:18 IST" name="Default suite" finished-at="2022-08-30T22:07:18 IST" duration-ms="61">
+    <groups>
+    </groups>
+    <test started-at="2022-08-30T22:07:18 IST" name="Default test" finished-at="2022-08-30T22:07:18 IST" duration-ms="61">
+      <class name="testng.com.SimpleAnnotations">
+        <test-method is-config="true" signature="chrome()[pri:0, instance:testng.com.SimpleAnnotations@29d80d2b]" started-at="2022-08-30T22:07:18 IST" name="chrome" finished-at="2022-08-30T22:07:18 IST" duration-ms="11" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- chrome -->
+        <test-method is-config="true" signature="OpenDriver()[pri:0, instance:testng.com.SimpleAnnotations@29d80d2b]" started-at="2022-08-30T22:07:18 IST" name="OpenDriver" finished-at="2022-08-30T22:07:18 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- OpenDriver -->
+        <test-method is-config="true" signature="Login()[pri:0, instance:testng.com.SimpleAnnotations@29d80d2b]" started-at="2022-08-30T22:07:18 IST" name="Login" finished-at="2022-08-30T22:07:18 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Login -->
+        <test-method is-config="true" signature="Login2()[pri:0, instance:testng.com.SimpleAnnotations@29d80d2b]" started-at="2022-08-30T22:07:18 IST" name="Login2" finished-at="2022-08-30T22:07:18 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Login2 -->
+        <test-method signature="CoverDetails()[pri:1, instance:testng.com.SimpleAnnotations@29d80d2b]" started-at="2022-08-30T22:07:18 IST" name="CoverDetails" finished-at="2022-08-30T22:07:18 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- CoverDetails -->
+        <test-method is-config="true" signature="VerifyHomePage()[pri:0, instance:testng.com.SimpleAnnotations@29d80d2b]" started-at="2022-08-30T22:07:18 IST" name="VerifyHomePage" finished-at="2022-08-30T22:07:18 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyHomePage -->
+        <test-method signature="BasicDetails()[pri:0, instance:testng.com.SimpleAnnotations@29d80d2b]" started-at="2022-08-30T22:07:18 IST" name="BasicDetails" finished-at="2022-08-30T22:07:18 IST" depends-on-methods="testng.com.SimpleAnnotations.CoverDetails" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- BasicDetails -->
+        <test-method is-config="true" signature="Login2()[pri:0, instance:testng.com.SimpleAnnotations@29d80d2b]" started-at="2022-08-30T22:07:18 IST" name="Login2" finished-at="2022-08-30T22:07:18 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Login2 -->
+        <test-method is-config="true" signature="VerifyHomePage()[pri:0, instance:testng.com.SimpleAnnotations@29d80d2b]" started-at="2022-08-30T22:07:18 IST" name="VerifyHomePage" finished-at="2022-08-30T22:07:18 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyHomePage -->
+        <test-method is-config="true" signature="Nit()[pri:0, instance:testng.com.SimpleAnnotations@29d80d2b]" started-at="2022-08-30T22:07:18 IST" name="Nit" finished-at="2022-08-30T22:07:18 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Nit -->
+        <test-method is-config="true" signature="BrowserClose()[pri:0, instance:testng.com.SimpleAnnotations@29d80d2b]" started-at="2022-08-30T22:07:18 IST" name="BrowserClose" finished-at="2022-08-30T22:07:18 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- BrowserClose -->
+        <test-method is-config="true" signature="DeleteCookies()[pri:0, instance:testng.com.SimpleAnnotations@29d80d2b]" started-at="2022-08-30T22:07:18 IST" name="DeleteCookies" finished-at="2022-08-30T22:07:18 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- DeleteCookies -->
+      </class> <!-- testng.com.SimpleAnnotations -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
