@@ -88,9 +88,9 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		Thread.sleep(3000);
 		try {  
 				     while(driver.findElement(By.id("UserName")).isDisplayed())
-				    	 {Thread.sleep(1000);
+				    	 {Thread.sleep(200);
 		    	 	   try {
-		    	Thread.sleep(1000);
+		    	Thread.sleep(500);
 		    	driver.findElement(By.id("UserName")).clear();
 				driver.findElement(By.id("Password")).clear();
 				//driver.findElement(By.id("UserName")).sendKeys("venkat@nic.in");
@@ -118,7 +118,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 				driver.findElement(By.id("submitSHA")).click();
 				System.out.println("Sucessful - First Login");
 				System.out.println("Available");
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 		    	  } 
 			   		  catch (NoSuchElementException e) {
 		    			System.out.println(e);		
@@ -132,6 +132,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 	Thread.sleep(2000);
 	Robot1();
 			for(int i=1;i<10;i++) {
+				Thread.sleep(1000);
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		driver.findElement(By.xpath("//a[contains(text(),'Create Tender')]")).click();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -146,7 +147,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		selection(driver.findElement(By.name("tenderCategory")), "ByVisibleText",tenderCategory );
 		selection(driver.findElement(By.name("bidOpenerType")), "ByIndex", bidOpenerType);
 		try {
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 			driver.findElement(By.xpath("(//input[@value='1'])")).click();
 		} catch (NoSuchElementException e) {
 		
@@ -155,7 +156,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		}
 		
 		try {
-			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 			driver.findElement(By.id("multiCurYes")).click();
 		} catch (NoSuchElementException e) {
 			// TODO Auto-generated catch block
@@ -189,7 +190,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			selection(driver.findElement(By.id("docType")), "ByVisibleText", ".xls");Thread.sleep(500);
 			driver.findElement(By.id("Save")).click();Thread.sleep(500);
 			driver.findElement(By.id("DirectLink_2")).click();
-			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 			driver.findElement(By.id("Next")).click();
 			Thread.sleep(200);
 			System.out.println("Sucessful - Cover details");
@@ -222,7 +223,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		System.out.println("Sucessful - NIT Document verified");
 	 	}
 		}
-		catch (Exception e) {
+		catch (NoSuchElementException e) {
 			{ driver.findElement(By.id("DirectLink_0")).click();
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.findElement(By.id("checkbox4")).click();
@@ -258,9 +259,9 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			driver.findElement(By.id("instrumentCheckBox_0")).click();
 			driver.findElement(By.id("instrumentCheckBox_1")).click();
 			driver.findElement(By.id("instrumentCheckBox_2")).click();
-		*/			
+					
 			driver.findElement(By.id("gteDetailsAllowedYes")).click();Thread.sleep(1000);
-		
+		*/
 			
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -285,9 +286,11 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			e1.printStackTrace();
 			}
 		try {
-			Thread.sleep(3000);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);	
+			if(driver.findElement(By.id("gteDetailsAllowedYes")).isSelected()) {
 			driver.findElement(By.id("DirectLink_1")).click();
 			System.out.println("GTE Selected");
+			}
 			Thread.sleep(3000);
 			}
 		 	catch (Exception e1) {
@@ -358,8 +361,8 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			    selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "09");
 			    selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "09");
 			    selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "09");
-			    selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "09");
-			    selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "09");
+			    selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "10");
+			    selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "10");
 			    
 			    selection(driver.findElement(By.id("publishingDateMin")), "byVisibleText", "05");
 			    selection(driver.findElement(By.id("documentSaleStartDateMin")), "byVisibleText", "05");
@@ -377,8 +380,8 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			    driver.findElement(By.id("publishDate")).sendKeys(date);Thread.sleep(200);
 			    driver.findElement(By.id("documentSaleStartDate")).sendKeys(date);Thread.sleep(200);
 			    driver.findElement(By.id("bidSubStartDate")).sendKeys(date);Thread.sleep(200);
-			    driver.findElement(By.id("bidSubCloseDate")).sendKeys(date); Thread.sleep(200);
-			    driver.findElement(By.id("bidOpenDate")).sendKeys(date);Thread.sleep(200);
+			    driver.findElement(By.id("bidSubCloseDate")).sendKeys(DATE1); Thread.sleep(200);
+			    driver.findElement(By.id("bidOpenDate")).sendKeys(DATE1);Thread.sleep(200);
 			    	    
 			    selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", timeH);
 			    selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", timeH);
@@ -389,14 +392,14 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			    selection(driver.findElement(By.id("publishingDateMin")), "byVisibleText", timer);
 			    selection(driver.findElement(By.id("documentSaleStartDateMin")), "byVisibleText", timer);
 			    selection(driver.findElement(By.id("bidSubmissionStartDateMin")), "byVisibleText", timer);
-			    selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", timer15);
-			    selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", timer15);
+			    selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", timer);
+			    selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", timer);
 			    
-			    System.out.println("publishingDateMin :"+timer);
-			    System.out.println("documentSaleStartDateMin :"+timer);
-			    System.out.println("bidSubmissionClosingDateMin :"+timer);
-			    System.out.println("bidSubmissionClosingDateMin :"+timer15);
-			    System.out.println("bidOpeningDateMin :"+timer15);
+			    System.out.println("publishingDateMin: " +date+" - " +timeH+":"+timer);
+			    System.out.println("documentSaleStartDateMin: " +date+" - " +timeH+":"+timer);
+			    System.out.println("bidSubmissionClosingDateMin: "+date+" - " +timeH+":"+timer);
+			    System.out.println("bidSubmissionClosingDateMin: "+DATE1+" - " +timeH+":"+timer);
+			    System.out.println("bidOpeningDateMin: "+DATE1+" - " +timeH+":"+timer);
 			    
 			   Thread.sleep(5000);
 				 
@@ -406,8 +409,8 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 				driver.findElement(By.id("publishDate")).sendKeys(date);Thread.sleep(200);
 			    driver.findElement(By.id("documentSaleStartDate")).sendKeys(date);Thread.sleep(200);
 			    driver.findElement(By.id("bidSubStartDate")).sendKeys(date);Thread.sleep(200);
-			    driver.findElement(By.id("bidSubCloseDate")).sendKeys(date); Thread.sleep(200);
-			    driver.findElement(By.id("bidOpenDate")).sendKeys(date);Thread.sleep(200);
+			    driver.findElement(By.id("bidSubCloseDate")).sendKeys(DATE1); Thread.sleep(200);
+			    driver.findElement(By.id("bidOpenDate")).sendKeys(DATE1);Thread.sleep(200);
 			    	    
 			    selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", timeH1);
 			    selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", timeH1);
@@ -418,14 +421,14 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			    selection(driver.findElement(By.id("publishingDateMin")), "byVisibleText", timer60);
 			    selection(driver.findElement(By.id("documentSaleStartDateMin")), "byVisibleText", timer60);
 			    selection(driver.findElement(By.id("bidSubmissionStartDateMin")), "byVisibleText", timer60);
-			    selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", timer560);
-			    selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", timer560);
+			    selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", timer60);
+			    selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", timer60);
 			    
-			    System.out.println("publishingDateMin :"+timer60);
-			    System.out.println("documentSaleStartDateMin :"+timer60);
-			    System.out.println("bidSubmissionStartDateMin :"+timer60);
-			    System.out.println("bidSubmissionClosingDateMin :"+timer560);
-			    System.out.println("bidOpeningDateMin :"+timer560);
+			    System.out.println("publishingDateMin: " +date+" - " +timeH1+":" +timer60);
+			    System.out.println("documentSaleStartDateMin: " +date+" - " +timeH1+":" +timer60);
+			    System.out.println("bidSubmissionStartDateMin: "+date+" - " +timeH1+":"+timer60);
+			    System.out.println("bidSubmissionClosingDateMin: "+DATE1+" - " +timeH1+":"+timer60);
+			    System.out.println("bidOpeningDateMin :"+DATE1+" - " +timeH1+":"+timer60);
 			    
 			   Thread.sleep(5000);
 				 
@@ -614,7 +617,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 	}
 	public static void Robot1() throws AWTException {
 		Robot robot = new Robot();
-		robot.mouseMove(480, 515);
+		robot.mouseMove(465, 530);
 		robot.delay(1500);
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
@@ -624,7 +627,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 		robot.delay(2000);
-		robot.mouseMove(465, 485);
+		robot.mouseMove(465, 495);
 		robot.delay(3000);
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
@@ -663,11 +666,12 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 	}
 	public static void UploadNit() throws AWTException {
 		Robot robot = new Robot();
-		robot.mouseMove(1085, 445);
-		robot.delay(4000);
+		robot.mouseMove(970, 515);
+		robot.delay(3000);
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-		setClipboardData("C:\\Users\\admin\\Documents\\TenderDocument.pdf");	
+		robot.delay(1000);	
+		setClipboardData("C:\\Users\\91991\\Documents\\TenderDocument.pdf");	
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
@@ -675,15 +679,15 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		robot.keyRelease(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
-		robot.delay(3000);
-		robot.mouseMove(1118, 445);
-		robot.delay(3000);
+		robot.delay(500);
+		robot.mouseMove(995, 515);
+		robot.delay(1000);
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-		robot.delay(3000);
+		robot.delay(8000);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
-		robot.delay(3000);
+		robot.delay(1000);
 	}
 
 	public static void Signingpdf() throws AWTException {
