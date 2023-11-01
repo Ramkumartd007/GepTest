@@ -329,12 +329,12 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 	  	  	 
 	  	 try {
 			if(timeHH < 9) {   	
-			
-				driver.findElement(By.id("publishDate")).sendKeys(date);Thread.sleep(200);
-			    driver.findElement(By.id("documentSaleStartDate")).sendKeys(date);Thread.sleep(200);
-			    driver.findElement(By.id("bidSubStartDate")).sendKeys(date);Thread.sleep(200);
-			    driver.findElement(By.id("bidSubCloseDate")).sendKeys(date); Thread.sleep(200);
-			    driver.findElement(By.id("bidOpenDate")).sendKeys(date);Thread.sleep(200);
+				 System.out.println(" Tender Creation Before: 9 am");
+				driver.findElement(By.id("publishDate")).sendKeys(date);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("documentSaleStartDate")).sendKeys(date);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("bidSubStartDate")).sendKeys(date);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("bidSubCloseDate")).sendKeys(date); Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("bidOpenDate")).sendKeys(date);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 			    	    
 			    selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "09");
 			    selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "09");
@@ -348,15 +348,16 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			    selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", "20");
 			    selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", "20");	 
 			    Thread.sleep(5000);
-			 System.out.println(" Tender Creation Before: 9 am");}
+			    System.out.println(" Tender Created Before: 9 am");
+			}
 			 
 			 else if (timeHH >19) {  
-				
-				driver.findElement(By.id("publishDate")).sendKeys(DATE1);Thread.sleep(200);
-			    driver.findElement(By.id("documentSaleStartDate")).sendKeys(DATE1);Thread.sleep(200);
-			    driver.findElement(By.id("bidSubStartDate")).sendKeys(DATE1);Thread.sleep(200);
-			    driver.findElement(By.id("bidSubCloseDate")).sendKeys(DATE1); Thread.sleep(200);
-			    driver.findElement(By.id("bidOpenDate")).sendKeys(DATE1);Thread.sleep(200);
+				 System.out.println(" Tender Creation after: 7 pm");
+				driver.findElement(By.id("publishDate")).sendKeys(DATE1);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("documentSaleStartDate")).sendKeys(DATE1);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("bidSubStartDate")).sendKeys(DATE1);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("bidSubCloseDate")).sendKeys(DATE1); Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("bidOpenDate")).sendKeys(DATE1);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 			    	    
 			    selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "09");
 			    selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "09");
@@ -371,16 +372,25 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			    selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", "20");	 
 			    
 			    Thread.sleep(2000);
-			 System.out.println(" Tender Creation after: 7 pm");}
+			 System.out.println(" Tender Created after: 7 pm");}
 			 
 			 else {
 			    
 			 if(timemr <= 50 && timemr5 <= 60 ) {
 				 
-			    driver.findElement(By.id("publishDate")).sendKeys(date);Thread.sleep(200);
-			    driver.findElement(By.id("documentSaleStartDate")).sendKeys(date);Thread.sleep(200);
-			    driver.findElement(By.id("bidSubStartDate")).sendKeys(date);Thread.sleep(200);
-			    driver.findElement(By.id("bidSubCloseDate")).sendKeys(DATE1); Thread.sleep(200);
+				System.out.println("timemr <= 50 && timemr5 <= 60 ");
+				 
+				System.out.println("Going to publishingDateMin: " +date+" - " +timeH+":"+timer);
+				System.out.println("Going to documentSaleStartDateMin: " +date+" - " +timeH+":"+timer);
+				System.out.println("Going to bidSubmissionClosingDateMin: "+date+" - " +timeH+":"+timer);
+				System.out.println("Going to bidSubmissionClosingDateMin: "+DATE1+" - " +timeH+":"+timer);
+				System.out.println("Going to bidOpeningDateMin: "+DATE1+" - " +timeH+":"+timer);
+				    
+				 
+			    driver.findElement(By.id("publishDate")).sendKeys(date);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("documentSaleStartDate")).sendKeys(date);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("bidSubStartDate")).sendKeys(date);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("bidSubCloseDate")).sendKeys(DATE1);Thread.sleep(200); driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 			    driver.findElement(By.id("bidOpenDate")).sendKeys(DATE1);Thread.sleep(200);
 			    	    
 			    selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", timeH);
@@ -395,22 +405,31 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			    selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", timer);
 			    selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", timer);
 			    
-			    System.out.println("publishingDateMin: " +date+" - " +timeH+":"+timer);
-			    System.out.println("documentSaleStartDateMin: " +date+" - " +timeH+":"+timer);
-			    System.out.println("bidSubmissionClosingDateMin: "+date+" - " +timeH+":"+timer);
-			    System.out.println("bidSubmissionClosingDateMin: "+DATE1+" - " +timeH+":"+timer);
-			    System.out.println("bidOpeningDateMin: "+DATE1+" - " +timeH+":"+timer);
+			    System.out.println("Marked as publishingDateMin: " +date+" - " +timeH+":"+timer);
+			    System.out.println("Marked as documentSaleStartDateMin: " +date+" - " +timeH+":"+timer);
+			    System.out.println("Marked as bidSubmissionClosingDateMin: "+date+" - " +timeH+":"+timer);
+			    System.out.println("Marked as bidSubmissionClosingDateMin: "+DATE1+" - " +timeH+":"+timer);
+			    System.out.println("Marked as bidOpeningDateMin: "+DATE1+" - " +timeH+":"+timer);
 			    
 			   Thread.sleep(5000);
 				 
 			 }
 			else if(timemr >= 60 && timemr5 >= 60 ) {
+				
+				System.out.println("timemr >= 60 && timemr5 >= 60");
+				
+				System.out.println("Going to publishingDateMin: " +date+" - " +timeH1+":" +timer60);
+			    System.out.println("Going to documentSaleStartDateMin: " +date+" - " +timeH1+":" +timer60);
+			    System.out.println("Going to bidSubmissionStartDateMin: "+date+" - " +timeH1+":"+timer60);
+			    System.out.println("Going to bidSubmissionClosingDateMin: "+DATE1+" - " +timeH1+":"+timer60);
+			    System.out.println("Going to bidOpeningDateMin :"+DATE1+" - " +timeH1+":"+timer60);
+			    
 				 
-				driver.findElement(By.id("publishDate")).sendKeys(date);Thread.sleep(200);
-			    driver.findElement(By.id("documentSaleStartDate")).sendKeys(date);Thread.sleep(200);
-			    driver.findElement(By.id("bidSubStartDate")).sendKeys(date);Thread.sleep(200);
-			    driver.findElement(By.id("bidSubCloseDate")).sendKeys(DATE1); Thread.sleep(200);
-			    driver.findElement(By.id("bidOpenDate")).sendKeys(DATE1);Thread.sleep(200);
+				driver.findElement(By.id("publishDate")).sendKeys(date);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("documentSaleStartDate")).sendKeys(date);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("bidSubStartDate")).sendKeys(date);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("bidSubCloseDate")).sendKeys(DATE1); Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			    driver.findElement(By.id("bidOpenDate")).sendKeys(DATE1);Thread.sleep(200);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 			    	    
 			    selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", timeH1);
 			    selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", timeH1);
@@ -424,11 +443,11 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			    selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", timer60);
 			    selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", timer60);
 			    
-			    System.out.println("publishingDateMin: " +date+" - " +timeH1+":" +timer60);
-			    System.out.println("documentSaleStartDateMin: " +date+" - " +timeH1+":" +timer60);
-			    System.out.println("bidSubmissionStartDateMin: "+date+" - " +timeH1+":"+timer60);
-			    System.out.println("bidSubmissionClosingDateMin: "+DATE1+" - " +timeH1+":"+timer60);
-			    System.out.println("bidOpeningDateMin :"+DATE1+" - " +timeH1+":"+timer60);
+			    System.out.println("Marked as publishingDateMin: " +date+" - " +timeH1+":" +timer60);
+			    System.out.println("Marked as documentSaleStartDateMin: " +date+" - " +timeH1+":" +timer60);
+			    System.out.println("Marked as bidSubmissionStartDateMin: "+date+" - " +timeH1+":"+timer60);
+			    System.out.println("Marked as bidSubmissionClosingDateMin: "+DATE1+" - " +timeH1+":"+timer60);
+			    System.out.println("Marked as bidOpeningDateMin :"+DATE1+" - " +timeH1+":"+timer60);
 			    
 			   Thread.sleep(5000);
 				 
@@ -507,8 +526,6 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			Thread.sleep(1500);
 			ItemRateTemplate();
 			System.out.println("sucessful - BOQ Upload ");
-			Thread.sleep(1500);
-			Signingpdf();
 			System.out.println("sucessful - BOQ Signed");
 			Thread.sleep(1500);
 			driver.findElement(By.id("save")).click();
@@ -664,6 +681,31 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		robot.delay(3000);
 
 	}
+	
+	public static void ItemWiseTemplate() throws AWTException {
+		Robot robot = new Robot();
+		robot.mouseMove(900, 490);
+		robot.delay(3000);
+		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+		robot.delay(3000);
+		setClipboardData("C:\\Users\\91991\\Documents\\BOQ\\V3_BOQ_ItemWiseGST_HSN.xls");	
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_V);
+		robot.delay(1000);	
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		robot.delay(500);
+		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+		robot.delay(8000);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		robot.delay(1000);
+
+	}
 	public static void UploadNit() throws AWTException {
 		Robot robot = new Robot();
 		robot.mouseMove(970, 515);
@@ -680,7 +722,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 		robot.delay(500);
-		robot.mouseMove(995, 515);
+		robot.mouseMove(985, 523);
 		robot.delay(1000);
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
