@@ -1,4 +1,4 @@
-package testng;
+package demoeproc;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -64,7 +64,7 @@ public class BidOpenig extends BaseClass {
 	   String timer60 = String.valueOf(timemr-60);
 	   String timer560 = String.valueOf(timemr5-60);
 	  	 
-	    String Tenderid = "2023_NICT_9899_1";
+	    String Tenderid = "2023_NICT_9824_1";
 	  	
 	  	 
 		Properties prop = new Properties();
@@ -73,8 +73,8 @@ public class BidOpenig extends BaseClass {
 		System.setProperty("webdriver.gecko.driver",
 				"C:\\Users\\91991\\eclipse-workspace\\com\\Driver\\geckodriver.exe");
 		WebDriver driver = new FirefoxDriver();
-		driver.get("https://demoetenders.tn.nic.in/nicgep/app");
-		//driver.get("https://demoeproc.nic.in/nicgep/app");
+		//driver.get("https://demoetenders.tn.nic.in/nicgep/app");
+		driver.get("https://demoeproc.nic.in/nicgep/app");
 		driver.manage().window().maximize();
 		Thread.sleep(3000);
 		driver.findElement(By.id("login")).click(); 
@@ -86,10 +86,10 @@ public class BidOpenig extends BaseClass {
 		    	Thread.sleep(1000);
 		    	driver.findElement(By.id("UserName")).clear();
 				driver.findElement(By.id("Password")).clear();
-				driver.findElement(By.id("UserName")).sendKeys("deptuser4@nic.in");
-				driver.findElement(By.id("Password")).sendKeys("Admin123$");
-				//driver.findElement(By.id("UserName")).sendKeys("venkat@nic.in");
-				//driver.findElement(By.id("Password")).sendKeys("Ven2490$");
+				//driver.findElement(By.id("UserName")).sendKeys("deptuser4@nic.in");
+				//driver.findElement(By.id("Password")).sendKeys("Admin123$");
+				driver.findElement(By.id("UserName")).sendKeys("venkat@nic.in");
+				driver.findElement(By.id("Password")).sendKeys("Ven2490$");
 				
 				//driver.findElement(By.id("UserName")).sendKeys("kevin@gmail.com");
 				//driver.findElement(By.id("Password")).sendKeys("Admin123$");

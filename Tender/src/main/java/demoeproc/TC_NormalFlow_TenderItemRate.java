@@ -1,4 +1,4 @@
-package testng;
+package demoeproc;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -68,7 +68,8 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 	  	 
 	    //String Title = "Ver.20/ATP/Works/TypeofCor/AOC";
 	   	//String Title = " Ver.20/ITE/SF/CD/eAgre/LOA/AOC";
-	   	String Title = "Ver.20/Status/bidder/Dept/Home";
+	   	//String Title = "Ver.20/Status/bidder/Dept/Home";
+	      String Title = "Ver.20/Coal/AOC/Revoc/AOCcorri";
 	   
 	   	String tenderType = "Open Tender";
 		String formContract = "Supply";
@@ -82,8 +83,8 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		System.setProperty("webdriver.gecko.driver",
 					"C:\\Users\\91991\\eclipse-workspace\\com\\Driver\\geckodriver.exe");
 		WebDriver driver = new FirefoxDriver();
-		driver.get("https://demoetenders.tn.nic.in/nicgep/app");
-		//driver.get("https://demoeproc.nic.in/nicgep/app");
+		//driver.get("https://demoetenders.tn.nic.in/nicgep/app");
+		driver.get("https://demoeproc.nic.in/nicgep/app");
 		driver.manage().window().maximize();
 		Thread.sleep(3000);
 		driver.findElement(By.id("login")).click(); 
@@ -96,11 +97,11 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		    	Thread.sleep(1000);
 		    	driver.findElement(By.id("UserName")).clear();
 				driver.findElement(By.id("Password")).clear();
-				//driver.findElement(By.id("UserName")).sendKeys("venkat@nic.in");
-				//driver.findElement(By.id("Password")).sendKeys("Ven2490$");
+				driver.findElement(By.id("UserName")).sendKeys("venkat@nic.in");
+				driver.findElement(By.id("Password")).sendKeys("Ven2490$");
 				
-				driver.findElement(By.id("UserName")).sendKeys("deptuser4@nic.in");
-				driver.findElement(By.id("Password")).sendKeys("Admin123$");
+				//driver.findElement(By.id("UserName")).sendKeys("deptuser4@nic.in");
+				//driver.findElement(By.id("Password")).sendKeys("Admin123$");
 				WebElement capt = driver.findElement(By.xpath("//img[@id='captchaImage']"));
 				File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 				BufferedImage fullImg = ImageIO.read(screenshot);
@@ -155,9 +156,9 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		} catch (NoSuchElementException e) {
 		
 			// TODO Auto-generated catch block
-			System.out.println("Automation is Disabled");;
+			System.out.println("Automation is Disabled");
 		}
-		
+		/*
 		try {
 			driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 			driver.findElement(By.id("multiCurYes")).click();
@@ -165,7 +166,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			// TODO Auto-generated catch block
 			System.out.println("Multicurrency is Disabled");
 		}
-		
+		*/
 		
 		try {
 			driver.findElement(By.id("Next")).click();
@@ -195,7 +196,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			driver.findElement(By.id("DirectLink_2")).click();
 			driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 			driver.findElement(By.id("Next")).click();
-			Thread.sleep(300);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+			Thread.sleep(300);
 			System.out.println("Sucessful - Cover details");
 		} catch (Exception e3) {
 			// TODO Auto-generated catch block
@@ -206,9 +207,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		// NIT Document
 		try
 		{
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);	
-		if (driver.findElement(By.id("DirectLink_2")).isDisplayed())
-		{ Thread.sleep(1000);
+		 Thread.sleep(1000);
 		driver.findElement(By.id("DirectLink_2")).click();
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		driver.findElement(By.id("description")).sendKeys("NIT");
@@ -225,16 +224,9 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		driver.findElement(By.id("DirectLink_3")).click();
 		System.out.println("Sucessful - NIT Document verified");
 	 	}
-		}
+		
 		catch (NoSuchElementException e) {
-			{ driver.findElement(By.id("DirectLink_0")).click();
-			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-			driver.findElement(By.id("checkbox4")).click();
-			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-			driver.findElement(By.id("Verifysave")).click();
-			Thread.sleep(500);
-			driver.findElement(By.id("DirectLink_3")).click();
-			System.out.println("Sucessful - NIT Document verified");
+			{ System.out.println(e);
 		}
 		 	}
 					
@@ -456,7 +448,6 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			   Thread.sleep(5000);
 				 
 			 }else if(timemr >= 50 && timemr5 >=60 ) {
-				 	 		 
 				 System.out.println("timemr >= 50 && timemr5 >=60");
 				 driver.findElement(By.id("publishDate")).sendKeys(date);Thread.sleep(300);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 			 	 driver.findElement(By.id("documentSaleStartDate")).sendKeys(date);Thread.sleep(300);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
@@ -506,10 +497,10 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		
 		// Bid openers List
 		try {
-		driver.findElement(By.xpath("//td[text()='deptuser4@nic.in']//following-sibling::td//input")).click();
-		driver.findElement(By.xpath("//td[text()='deptuser7@nic.in']//following-sibling::td//input")).click();
-		driver.findElement(By.xpath("//td[text()='badhri@nic.in']//following-sibling::td//input")).click();
-		driver.findElement(By.xpath("//td[text()='sakthi@nic.in']//following-sibling::td//input")).click();
+		driver.findElement(By.xpath("//td[text()='venkat@nic.in']//following-sibling::td//input")).click();
+		driver.findElement(By.xpath("//td[text()='deptuser27@nic.in']//following-sibling::td//input")).click();
+		driver.findElement(By.xpath("//td[text()='kevin@gmail.com']//following-sibling::td//input")).click();
+		//driver.findElement(By.xpath("//td[text()='sakthi@nic.in']//following-sibling::td//input")).click();
 		driver.findElement(By.id("Submit")).click();
 		System.out.println("Sucessful - Bid openers List");
 		} catch (NoSuchElementException e) {

@@ -1,4 +1,4 @@
-package testng;
+package demoeproc;
 
 
 import java.awt.AWTException;
@@ -36,7 +36,7 @@ import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
-public class BDS_Works extends BaseClass {
+public class BDS_Services extends BaseClass {
 
 	public static WebDriver driver;
 	private static String Work_BOQ;
@@ -44,7 +44,7 @@ public class BDS_Works extends BaseClass {
 	public static void main(String[] args) throws InterruptedException, AWTException, IOException, TesseractException, ParseException {
 
 		System.setProperty("webdriver.gecko.driver",
-				"F:\\Ram\\eclipse-workspace\\Tender\\Driver\\geckodriver.exe");
+				"C:\\Users\\91991\\eclipse-workspace\\com\\Driver\\geckodriver.exe");
 		WebDriver driver = new FirefoxDriver();
 		//driver.get("https://demoetenders.tn.nic.in/nicgep/app");
 		driver.get("https://demoeproc.nic.in/nicgep/app");
@@ -52,16 +52,16 @@ public class BDS_Works extends BaseClass {
 		Thread.sleep(2000);
 		driver.findElement(By.id("login")).click(); 
 		Thread.sleep(2000);
-		String Tenderid = "2023_NICT_9899_1";
+		String Tenderid = "2023_NICTD_85247_1";
 		try {  
 			while(driver.findElement(By.id("UserName")).isDisplayed())
 			{
-				Thread.sleep(500);
+				Thread.sleep(1000);
 				try {
-					Thread.sleep(500); 
+					Thread.sleep(1000); 
 					driver.findElement(By.id("UserName")).clear();
 					driver.findElement(By.id("Password")).clear();
-					driver.findElement(By.id("UserName")).sendKeys("bidder8@nic.in");
+					driver.findElement(By.id("UserName")).sendKeys("bidder9@nic.in");
 					driver.findElement(By.id("Password")).sendKeys("Admin123$");
 					//driver.findElement(By.id("UserName")).sendKeys("kevin@gmail.com");
 					//driver.findElement(By.id("Password")).sendKeys("Kev0746$");
@@ -74,11 +74,11 @@ public class BDS_Works extends BaseClass {
 					int eleHeight = capt.getSize().getHeight();
 					BufferedImage eleScreenshot = fullImg.getSubimage(point.getX(), point.getY(), eleWidth, eleHeight);
 					ImageIO.write(eleScreenshot, "png", screenshot);
-					File screenshotLocation = new File("F:\\Ram\\eclipse-workspace\\Tender\\Screenshot\\Captcha.png");
+					File screenshotLocation = new File("C:\\Users\\91991\\eclipse-workspace\\com\\Screenshot\\Captcha.png");
 					FileUtils.copyFile(screenshot, screenshotLocation);
 					ITesseract image = new Tesseract();
 					String imagetest = image
-							.doOCR(new File("F:\\Ram\\eclipse-workspace\\Tender\\Screenshot\\Captcha.png"));
+							.doOCR(new File("C:\\Users\\91991\\eclipse-workspace\\com\\Screenshot\\Captcha.png"));
 					String x = imagetest.replaceAll("[^a-z0-9A-Z]", "");
 					System.out.println(x);
 					driver.findElement(By.id("CaptchaText")).sendKeys(x);
@@ -119,7 +119,7 @@ public class BDS_Works extends BaseClass {
 
 		try {		
 
-			driver.findElement(By.id("PageLink_0_8")).click();Thread.sleep(3000);
+			driver.findElement(By.id("PageLink_0_6")).click();Thread.sleep(3000);
 			driver.findElement(By.id("TenderID")).sendKeys(Tenderid);
 			driver.findElement(By.id("search")).click(); Thread.sleep(2000);	
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
@@ -265,7 +265,7 @@ public class BDS_Works extends BaseClass {
 			System.out.println("GTE Process");
 		try {
 			Thread.sleep(1000);
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			if (driver.findElement(By.xpath(("//a[@title='GTE Details']//following-sibling::img[@src='images/action.png']"))).isDisplayed()) {
 				System.out.println("GTE is Present");
 				Thread.sleep(500);
@@ -280,7 +280,7 @@ public class BDS_Works extends BaseClass {
 					System.out.println("ROW COUNT : "+rcount);	
 					for(int i=2;i<rcount;i++) {	
 							System.out.println("SL.NO: "+i);
-							String Expected = driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+String.valueOf(i)+"]/td[3]")).getText();
+							String Expected = driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+String.valueOf(i)+"]/td[3]")).getText().trim();
 							System.out.println(Expected);
 							
 							Boolean x = Expected.contains("Yes");
@@ -346,8 +346,8 @@ public class BDS_Works extends BaseClass {
 				
 				try {
 					Thread.sleep(1000);
-					driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-					driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+					driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+					
 					if (driver.findElement(By.xpath(("//a[@title='ITE Details']//following-sibling::img[@src='images/action.png']"))).isDisplayed()) {
 						System.out.println("ITE is Present");
 						Thread.sleep(500);
@@ -386,17 +386,17 @@ public class BDS_Works extends BaseClass {
 				}
 		//ITE Completed	
 		
-		// Work Experience Details
+		// Service Experience Details
 		try {
 			Thread.sleep(1000);
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			if (driver.findElement(By.xpath(("//a[@title='Work Experience Details']//following-sibling::img[@src='images/action.png']"))).isDisplayed()) {
-				System.out.println("Work Experience Details is Present");
+			if (driver.findElement(By.xpath(("//a[@title='Service Experience Details']//following-sibling::img[@src='images/action.png']"))).isDisplayed()) {
+				System.out.println("Service Experience Details is Present");
 				Thread.sleep(500);
-				driver.findElement(By.xpath(("//a[@title='Work Experience Details']//following-sibling::img[@src='images/action.png']"))).click();
+				driver.findElement(By.xpath(("//a[@title='Service Experience Details']//following-sibling::img[@src='images/action.png']"))).click();
 				
 				Thread.sleep(1500);
-				System.out.println("Work Experience Details is Under Processing");
+				System.out.println("Service Experience Details is Under Processing");
 				try {
 					List<WebElement> rows = driver.findElements(By.xpath("//table[@id='tabList_1']/tbody/tr"));
 					int rcoun = rows.size();
@@ -426,7 +426,7 @@ public class BDS_Works extends BaseClass {
 			// TODO Auto-generated catch block
 			System.out.println("Already ITE is Updated");
 		}
-// Work Experience Completed	
+// Service Experience Completed	
 		
 // Turn Over Details
 				try {
