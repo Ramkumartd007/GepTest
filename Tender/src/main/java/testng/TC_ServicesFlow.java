@@ -41,7 +41,7 @@ import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
-public class TC_NormalFlow_TenderItemRate extends BaseClass {
+public class TC_ServicesFlow extends BaseClass {
 
 	public static WebDriver driver;
 
@@ -68,8 +68,9 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 	  	 
 	    //String Title = "Ver.20/ATP/Works/TypeofCor/AOC";
 	   	//String Title = " Ver.20/ITE/SF/CD/eAgre/LOA/AOC";
-	   	String Title = "Ver.20/Status/bidder/Dept/Home";
-	   
+	   	//String Title = "Ver.20/Status/bidder/Dept/Home";
+	      String Title = "Ver.20/Coal/Services/Checkflow/Aoc";
+	   	   
 	   	String tenderType = "Open Tender";
 		String formContract = "Supply";
 		String noOfPackets = "2";
@@ -150,8 +151,8 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		selection(driver.findElement(By.name("tenderCategory")), "ByVisibleText",tenderCategory );
 		selection(driver.findElement(By.name("bidOpenerType")), "ByIndex", bidOpenerType);
 		try {
-			driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-			driver.findElement(By.xpath("(//input[@value='1'])")).click();
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.findElement(By.xpath("//input[@id='mclAllowed'][@value = '0']")).click();
 		} catch (NoSuchElementException e) {
 		
 			// TODO Auto-generated catch block
@@ -159,13 +160,22 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		}
 		
 		try {
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.findElement(By.xpath("//input[@id='twoStageAllowed'][@value = '1']")).click();
+		} catch (NoSuchElementException e) {
+		
+			// TODO Auto-generated catch block
+			System.out.println("Two Stage Bidding is Disabled");;
+		}
+		/*
+		try {
 			driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 			driver.findElement(By.id("multiCurYes")).click();
 		} catch (NoSuchElementException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Multicurrency is Disabled");
 		}
-		
+		*/
 		
 		try {
 			driver.findElement(By.id("Next")).click();
@@ -226,7 +236,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 		System.out.println("Sucessful - NIT Document verified");
 	 	}
 		}
-		catch (NoSuchElementException e) {
+		catch (NoSuchElementException e)
 			{ driver.findElement(By.id("DirectLink_0")).click();
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.findElement(By.id("checkbox4")).click();
@@ -236,7 +246,7 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			driver.findElement(By.id("DirectLink_3")).click();
 			System.out.println("Sucessful - NIT Document verified");
 		}
-		 	}
+		
 					
 		// Work/Item Details
 		Thread.sleep(1500);
@@ -256,28 +266,65 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			driver.findElement(By.id("expireDays")).sendKeys("45");
 			driver.findElement(By.id("allowMediaPublishDateNo")).click();
 			driver.findElement(By.id("allowTenderBulletinDateNo")).click();
-		/*	driver.findElement(By.id("showBidderConsentYes")).click(); 
-			driver.findElement(By.id("alloweAgreementOptionYes")).click();
-			driver.findElement(By.id("privilegeBidderYes")).click();Thread.sleep(500);
-			driver.findElement(By.id("instrumentCheckBox_0")).click();
-			driver.findElement(By.id("instrumentCheckBox_1")).click();
-			driver.findElement(By.id("instrumentCheckBox_2")).click();
-					
-			driver.findElement(By.id("gteDetailsAllowedYes")).click();Thread.sleep(1000);
-		*/
+/*			driver.findElement(By.id("showBidderConsentYes")).click();							 //LOA
+			driver.findElement(By.id("alloweAgreementOptionYes")).click();						 //E-Agreement
+			
+			try {																			     //Preferential Bidder
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.findElement(By.xpath("//input[@id='privilegeBidderYes'][@value = '1']")).click();
+			Thread.sleep(500);			 	
+			driver.findElement(By.id("instrumentCheckBox_0")).click();							 //Preferential Category - 1	
+			driver.findElement(By.id("instrumentCheckBox_1")).click();							 //Preferential Category - 2
+			driver.findElement(By.id("instrumentCheckBox_2")).click();							 //Preferential Category - 3
+			} catch (NoSuchElementException e) {
+				
+				// TODO Auto-generated catch block
+				System.out.println("privilegeBidderYes is Disabled");
+			}
+			
+		//	driver.findElement(By.id("gteDetailsAllowedYes")).click();Thread.sleep(2000); 		 //GTE
+	*/	
 			
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			System.out.println("Select issue");
 		}
-		/*
+		
+		
+	//Service Experience	
 		try {
-			driver.findElement(By.xpath("//input[@name='mclServiceAllowed']")).click();
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.findElement(By.xpath("//input[@id='mclServiceAllowed'][@value = '0']")).click();
+			System.out.println("mclServiceAllowed is Enabled");
 		} catch (NoSuchElementException e) {
+		
 			// TODO Auto-generated catch block
-			System.out.println("No Service completion");
+			System.out.println("mclServiceAllowed is Disabled");
 		}
-		*/
+	//Resource Details	
+		try {
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.findElement(By.xpath("//input[@id='mclFleetAllowed'][@value = '0']")).click();
+			System.out.println("mclFleetAllowed is Enabled");
+		} catch (NoSuchElementException e) {
+		
+			// TODO Auto-generated catch block
+			System.out.println("mclFleetAllowed is Disabled");
+		}
+		
+	//Working Capital	
+		try {
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.findElement(By.xpath("//input[@id='mclWorkingCapitalAllowed'][@value = '0']")).click();
+			System.out.println("mclWorkingCapitalAllowed is Enabled");
+		} catch (NoSuchElementException e) {
+		
+			// TODO Auto-generated catch block
+			System.out.println("mclWorkingCapitalAllowed is Disabled");
+		}
+		
+		
+		
 		try {
 			selection(driver.findElement(By.id("productCategory")), "ByVisibleText", "Air-Conditioner");
 			selection(driver.findElement(By.id("contractType")), "ByVisibleText", "Tender");
@@ -564,6 +611,25 @@ public class TC_NormalFlow_TenderItemRate extends BaseClass {
 			System.out.println("No Alert");;
 		}
 		Thread.sleep(1000);
+		
+		try {
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			if(driver.findElement(By.xpath("//td/span[text()='Resource Master (Fleet / Equipment / Manpower)']")).isDisplayed())
+			{
+				driver.findElement(By.xpath("//table[@id='tableView']/tbody/tr[10]/td[8]/input")).click();
+				String Rm = driver.findElement(By.xpath("//table[@id='tableView']/tbody/tr[10]/td[5]")).getText();
+				System.out.println("Resource master: "+ Rm);
+				driver.findElement(By.xpath("//table[@id='tableView']/tbody/tr[10]/td[9]/input")).sendKeys(Rm); Thread.sleep(200);
+				driver.findElement(By.id("Submit")).click(); Thread.sleep(200);
+				driver.findElement(By.xpath("//a[@value ='Next']")).click();Thread.sleep(200);
+			}
+			
+		} catch (NoSuchElementException e)
+		{
+			System.out.println("No Resource Master");
+		}
+		
+		
 		// OID Documents List
 		try {
 			driver.findElement(By.id("save")).click();
