@@ -52,7 +52,7 @@ public class BDS_Services extends BaseClass {
 		Thread.sleep(2000);
 		driver.findElement(By.id("login")).click(); 
 		Thread.sleep(2000);
-		String Tenderid = "2023_NICTD_85247_1";
+		String Tenderid = "2023_NICTD_85454_1";
 		try {  
 			while(driver.findElement(By.id("UserName")).isDisplayed())
 			{
@@ -61,6 +61,7 @@ public class BDS_Services extends BaseClass {
 					Thread.sleep(1000); 
 					driver.findElement(By.id("UserName")).clear();
 					driver.findElement(By.id("Password")).clear();
+					//driver.findElement(By.id("UserName")).sendKeys("bidder6@nic.in");
 					driver.findElement(By.id("UserName")).sendKeys("bidder9@nic.in");
 					driver.findElement(By.id("Password")).sendKeys("Admin123$");
 					//driver.findElement(By.id("UserName")).sendKeys("kevin@gmail.com");
@@ -188,6 +189,7 @@ public class BDS_Services extends BaseClass {
 		
 //Offline Payment		
 		try {
+			Thread.sleep(1500);
 				if(driver.findElement(By.id("offLine")).isDisplayed()) 
 					{
 					driver.findElement(By.id("offLine")).click();Thread.sleep(2000);
@@ -262,217 +264,279 @@ public class BDS_Services extends BaseClass {
 		
 //GTE Process
 			
-			System.out.println("GTE Process");
-		try {
-			Thread.sleep(1000);
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			if (driver.findElement(By.xpath(("//a[@title='GTE Details']//following-sibling::img[@src='images/action.png']"))).isDisplayed()) {
-				System.out.println("GTE is Present");
-				Thread.sleep(500);
-				driver.findElement(By.xpath(("//a[@title='GTE Details']//following-sibling::img[@src='images/action.png']"))).click();
-				
+			System.out.println("Bid Process List");
+			
+			try {
 				Thread.sleep(1500);
-				System.out.println("GTE is Under Processing");
-				try {
+				driver.manage().timeouts().implicitlyWait(500, TimeUnit.SECONDS);
+				boolean bid = driver.findElement(By.xpath("//td[text()='Bid Process List']")).isDisplayed();
+			
+				if(bid) {
+				Thread.sleep(500);
 					List<WebElement> rows = driver.findElements(By.xpath("//table[@id='tabList_1']/tbody/tr"));
 					int rcoun = rows.size();
 					int rcount = rcoun+1;
 					System.out.println("ROW COUNT : "+rcount);	
 					for(int i=2;i<rcount;i++) {	
-							System.out.println("SL.NO: "+i);
-							String Expected = driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+String.valueOf(i)+"]/td[3]")).getText().trim();
-							System.out.println(Expected);
-							
-							Boolean x = Expected.contains("Yes");
-							Boolean y = Expected.contains("");
-							try {
-								
-								if (x)
-								{
-									selection(driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+String.valueOf(i)+"]/td[4]/span/select")),"byVisibleText",Expected);Thread.sleep(200);
-								}else if (y)
-								{
-								System.out.println("Empty row");	
-								}else
-								{
-									driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+String.valueOf(i)+"]/td[4]/span/input")).sendKeys(Expected); Thread.sleep(200);
-								}
-							} catch (NoSuchElementException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-								}
-														
-							}
-					driver.findElement(By.id("save")).click(); Thread.sleep(500);
-					driver.findElement(By.id("save")).click();
-												
-					} catch (NoSuchElementException e) {
-									e.printStackTrace();				
-							}
-					}
-				
-			} catch (NoSuchElementException e1) {
-			// TODO Auto-generated catch block
-			System.out.println("Already GTE is Updated");
-				}
-//GTE Completed	
-
-//ITE Process			
-
-		try {
-			List<WebElement> rows = driver.findElements(By.xpath("//table[@id='tabList_1']/tbody/tr"));
-			int rcoun = rows.size();
-			int rcount = rcoun+1;
-			System.out.println("ROW COUNT : "+rcount);	
-			for(int i=2;i<rcount;i++) {	
-				System.out.println("SL.NO: "+i);
-				try {
+						Thread.sleep(1000);	
+						System.out.println("Loop: "+i);
 					
-					selection(driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+String.valueOf(i)+"]/td[6]/span/select")),"byVisibleText","Yes");Thread.sleep(500);
+					boolean iteT = driver.findElement(By.xpath("//table[@id='tabList_1']/tbody")).getText().contains("ITE Details");
+					boolean gte = driver.findElement(By.xpath("//table[@id='tabList_1']/tbody")).getText().contains("GTE Details");	
+					boolean WED = driver.findElement(By.xpath("//table[@id='tabList_1']/tbody")).getText().contains("Work Experience Details");			
+					boolean TOD = driver.findElement(By.xpath("//table[@id='tabList_1']/tbody")).getText().contains("Turn Over Details");	
+					boolean AVP = driver.findElement(By.xpath("//table[@id='tabList_1']/tbody")).getText().contains("Avail Preferential Bidder Option");	
 					
-				} catch (NoSuchElementException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					}
-				   }
-		driver.findElement(By.id("save")).click(); Thread.sleep(500);
-		driver.findElement(By.id("save")).click();
-									
-			} catch (NoSuchElementException e) {
-					e.printStackTrace();				
-				}
-		
-		//ITE Process	
-				
-				try {
-					Thread.sleep(1000);
-					driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+					boolean iteT1 = driver.findElement(By.xpath("//a[@title='GTE Details']//following-sibling::img[@src='images/action.png']")).isDisplayed();
+					boolean gte1 = driver.findElement(By.xpath("//a[@title='ITE Details']//following-sibling::img[@src='images/action.png']")).isDisplayed();	
+					boolean WED1 = driver.findElement(By.xpath("//a[@title='Work Experience Details']//following-sibling::img[@src='images/action.png']")).isDisplayed();			
+					boolean TOD1 = driver.findElement(By.xpath("//a[@title='Turn Over Details']//following-sibling::img[@src='images/action.png']")).isDisplayed();	
+					boolean AVP1 = driver.findElement(By.xpath("//a[@title='Avail Preferential Bidder Option']//following-sibling::img[@src='images/action.png']")).isDisplayed();	
 					
-					if (driver.findElement(By.xpath(("//a[@title='ITE Details']//following-sibling::img[@src='images/action.png']"))).isDisplayed()) {
-						System.out.println("ITE is Present");
-						Thread.sleep(500);
-						driver.findElement(By.xpath(("//a[@title='ITE Details']//following-sibling::img[@src='images/action.png']"))).click();
-						
-						Thread.sleep(1500);
-						System.out.println("ITE is Under Processing");
+					
+					
+					
+					System.out.println("iteT :" +iteT);
+					System.out.println("gte :" +gte);
+					System.out.println("WED :" +WED);
+					System.out.println("TOD :" +TOD);
+					System.out.println("AVP :" +AVP);
+					
+					
+					
+		//GTE Details
+	
 						try {
-							List<WebElement> rows = driver.findElements(By.xpath("//table[@id='tabList_1']/tbody/tr"));
-							int rcoun = rows.size();
-							int rcount = rcoun+1;
-							System.out.println("ROW COUNT : "+rcount);	
-							for(int i=3;i<rcount;i++) {	
-									System.out.println("SL.NO: "+i);
-									
+							if (gte||gte1) {
+								System.out.println("GTE is Present");
+								Thread.sleep(500);
+								driver.findElement(By.xpath(("//a[@title='GTE Details']//following-sibling::img[@src='images/action.png']"))).click();
+								
+								Thread.sleep(500);
+								System.out.println("GTE is Under Processing");
+								try {
+									List<WebElement> GTErows = driver.findElements(By.xpath("//table[@id='tabList_1']/tbody/tr"));
+									int GTErcoun = GTErows.size();
+									int GTErcount = GTErcoun+1;
+									System.out.println("ROW COUNT : "+GTErcoun);	
+									for(int cGTE=2;i<GTErcoun;cGTE++) {	
+											System.out.println("SL.NO: "+cGTE);
+											String Expected = driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+String.valueOf(cGTE)+"]/td[3]")).getText();
+											System.out.println(Expected);
+											
+											Boolean x = Expected.contains("Yes");
+											Boolean y = Expected.isBlank();
+											try {
+												
+												if (x)
+												{
+													selection(driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+String.valueOf(cGTE)+"]/td[4]/span/select")),"byVisibleText",Expected);Thread.sleep(200);
+												}else if (y)
+												{
+												System.out.println("Empty row");	
+												}else
+												{
+													driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+String.valueOf(cGTE)+"]/td[4]/span/input")).sendKeys(Expected); Thread.sleep(200);
+												}
+											} catch (NoSuchElementException e) {
+												// TODO Auto-generated catch block
+												System.out.println("GTE Skipped");
+												}
+																		
+											}
+									Thread.sleep(500);
+									driver.findElement(By.id("save")).click(); Thread.sleep(500);
+									driver.findElement(By.id("save")).click();
+									Thread.sleep(200);
+//vITE Process
+									System.out.println("vite is there");
 									try {
-										
-										selection(driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+String.valueOf(i)+"]/td[6]/span/select")),"byVisibleText","Yes");Thread.sleep(200);
-										
-									} catch (NoSuchElementException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-																
-									}
-							driver.findElement(By.id("save")).click(); Thread.sleep(500);
-							driver.findElement(By.id("save")).click();
-														
-						} catch (NoSuchElementException e) {
-							e.printStackTrace();				
-						}
-					}
-				} catch (NoSuchElementException e1) {
-					// TODO Auto-generated catch block
-					System.out.println("Already ITE is Updated");
-				}
-		//ITE Completed	
-		
-		// Service Experience Details
-		try {
-			Thread.sleep(1000);
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			if (driver.findElement(By.xpath(("//a[@title='Service Experience Details']//following-sibling::img[@src='images/action.png']"))).isDisplayed()) {
-				System.out.println("Service Experience Details is Present");
-				Thread.sleep(500);
-				driver.findElement(By.xpath(("//a[@title='Service Experience Details']//following-sibling::img[@src='images/action.png']"))).click();
-				
-				Thread.sleep(1500);
-				System.out.println("Service Experience Details is Under Processing");
-				try {
-					List<WebElement> rows = driver.findElements(By.xpath("//table[@id='tabList_1']/tbody/tr"));
-					int rcoun = rows.size();
-					int rcount = rcoun+1;
-					System.out.println("ROW COUNT : "+rcount);	
-					for(int i=2;i<5;i++) {	
-							System.out.println("SL.NO: "+i);
-							
-							try {
-								
-								driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+String.valueOf(i)+"]/td[11]/input")).click();Thread.sleep(200);
-								
-							} catch (NoSuchElementException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-														
-							}
-					driver.findElement(By.id("Verify")).click(); Thread.sleep(500);
-					driver.findElement(By.id("save")).click();
+										Thread.sleep(200);
+										driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+										if(driver.findElement(By.xpath("//table/tbody/tr/td[1][text()='View Bidder General Technical Details']")).isDisplayed()) {
+										List<WebElement> vITErows = driver.findElements(By.xpath("//table[@id='tabList_1']/tbody/tr"));
+										int vITErcoun = vITErows.size();
+										int vITErcount = vITErcoun+1;
+										System.out.println("ROW COUNT : "+vITErcount);	
+										for(int vite=2;vite<vITErcount;vite++) {	
+											System.out.println("SL.NO: "+vite);
+											try {
 												
-				} catch (NoSuchElementException e) {
-					e.printStackTrace();				
-				}
-			}
-		} catch (NoSuchElementException e1) {
-			// TODO Auto-generated catch block
-			System.out.println("Already ITE is Updated");
-		}
-// Service Experience Completed	
-		
-// Turn Over Details
-				try {
-					Thread.sleep(1000);
-					driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-					if (driver.findElement(By.xpath(("//a[@title='Turn Over Details']//following-sibling::img[@src='images/action.png']"))).isDisplayed()) {
-						System.out.println("Work Experience Details is Present");
-						Thread.sleep(500);
-						driver.findElement(By.xpath(("//a[@title='Turn Over Details']//following-sibling::img[@src='images/action.png']"))).click();
-						
-						Thread.sleep(1500);
-						System.out.println("Turn Over Details");
-						try {
-							driver.findElement(By.id("Submit")).click(); Thread.sleep(500);
-							driver.findElement(By.id("DirectLink_2")).click();
+												selection(driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+String.valueOf(vite)+"]/td[6]/span/select")),"byVisibleText","Yes");Thread.sleep(500);
+												
+											} catch (NoSuchElementException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+												}
+											   }
+									driver.findElement(By.id("save")).click(); Thread.sleep(500);
+									driver.findElement(By.id("save")).click();
+									System.out.println("vite is processed");
+										}		
+										} catch (NoSuchElementException e) {
+												e.printStackTrace();				
+											}
+									
+																
+									} catch (NoSuchElementException e) {
+													e.printStackTrace();				
+											}
+									}
+//ITE details			
+							else if (iteT ||iteT1)
+							{
+								try {
+									Thread.sleep(1000);
+									
+										System.out.println("ITE is Present");
+										Thread.sleep(500);
+										driver.findElement(By.xpath(("//a[@title='ITE Details']//following-sibling::img[@src='images/action.png']"))).click();
+										
+										Thread.sleep(1500);
+										System.out.println("ITE is Under Processing");
+										try {
+											List<WebElement> iterows = driver.findElements(By.xpath("//table[@id='tabList_1']/tbody/tr"));
+											int itercoun = iterows.size();
+											int itercount = itercoun+1;
+											System.out.println("ROW COUNT : "+itercount);	
+											for(int ite=3;ite<rcount;ite++) {	
+													System.out.println("SL.NO: "+i);
+													
+													try {
 														
+														selection(driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+String.valueOf(ite)+"]/td[6]/span/select")),"byVisibleText","Yes");Thread.sleep(200);
+														
+													} catch (NoSuchElementException e) {
+														// TODO Auto-generated catch block
+														e.printStackTrace();
+													}
+																				
+													}
+											driver.findElement(By.id("save")).click(); Thread.sleep(500);
+											driver.findElement(By.id("save")).click();
+											System.out.println("ITE Details Completed");
+											Thread.sleep(200);							
+										} catch (NoSuchElementException e) {
+											e.printStackTrace();				
+										
+									}
+								} catch (NoSuchElementException e1) {
+									// TODO Auto-generated catch block
+									System.out.println("Already ITE is Updated");
+								}
+							}
+							
+//ITE Details Completed		
+// Work Experience Details				
+							
+							else if (WED||WED1)
+							{
+							try {
+								Thread.sleep(1000);
+									System.out.println("Work Experience Details is Present");
+									Thread.sleep(500);
+									driver.findElement(By.xpath(("//a[@title='Work Experience Details']//following-sibling::img[@src='images/action.png']"))).click();
+									
+									Thread.sleep(1500);
+									System.out.println("Work Experience Details is Under Processing");
+									try {
+										List<WebElement> WEDrows = driver.findElements(By.xpath("//table[@id='tabList_1']/tbody/tr"));
+										int WEDrcoun = WEDrows.size();
+										int WEDrcount = WEDrcoun+1;
+										System.out.println("ROW COUNT : "+WEDrcount);	
+										for(int wed=2;wed<5;wed++) {	
+												System.out.println("SL.NO: "+i);
+												
+												try {
+													
+													driver.findElement(By.xpath("//table[@id='tabList_1']/tbody/tr["+String.valueOf(wed)+"]/td[11]/input")).click();Thread.sleep(200);
+													
+												} catch (NoSuchElementException e) {
+													// TODO Auto-generated catch block
+													e.printStackTrace();
+												}
+																	
+												}
+										driver.findElement(By.id("Verify")).click(); Thread.sleep(500);
+										driver.findElement(By.id("save")).click();
+										System.out.println(" Work Experience Details is Updated");
+																	
+									} catch (NoSuchElementException e) {
+										e.printStackTrace();				
+									}
+								
+							} catch (NoSuchElementException e1) {
+								// TODO Auto-generated catch block
+								System.out.println("Already Work Experience Details is Updated");
+							}
+							}
+// Work Experience Completed							
+							// Turn Over Details	
+else if (TOD||TOD1)
+							{				
+							try {
+								Thread.sleep(1000);
+								System.out.println("Work Experience Details is Present");
+									Thread.sleep(500);
+									driver.findElement(By.xpath(("//a[@title='Turn Over Details']//following-sibling::img[@src='images/action.png']"))).click();
+									
+									Thread.sleep(1500);
+									System.out.println("Turn Over Details");
+									try {
+										driver.findElement(By.id("Submit")).click(); Thread.sleep(500);
+										driver.findElement(By.id("DirectLink_2")).click();
+										System.out.println("Turn Over Details is Updated");
+																	
+									} catch (NoSuchElementException e) {
+										e.printStackTrace();				
+									}
+								
+							} catch (NoSuchElementException e1) {
+								// TODO Auto-generated catch block
+								System.out.println("Already Turn Over Details is Updated");
+							}
+							}
+// Turn Over Details Completed			
+							
+//Avail Preferential Bidder Option	
+else if (AVP||AVP1)
+							{		
+							try {
+									System.out.println("Avail Preferential Bidder Option is Present");
+									driver.findElement(By.xpath(("//a[@title='GTE Details']//following-sibling::img[@src='images/action.png']"))).click();Thread.sleep(500);
+									System.out.println("Avail Preferential Bidder Option is under Processing");
+									try {
+										driver.findElement(By.id("privilegeBidderYes")).click();Thread.sleep(2000);
+										Avail_PrefentialBidder_Document();
+										driver.findElement(By.id("save")).click(); Thread.sleep(500);
+										System.out.println("Avail Preferential Bidder Option is Completed");
+										} catch (NoSuchElementException e) {
+										System.out.println("Avail Preferential Bidder Option is not completed");			
+									}
+								
+							} catch (NoSuchElementException e1) {
+								// TODO Auto-generated catch block
+								System.out.println("Already Avail Preferential Bidder Option is completed");
+							}
+//Avail Preferential Bidder Option Completed				
+
+
+}
 						} catch (NoSuchElementException e) {
-							e.printStackTrace();				
+							// TODO Auto-generated catch block
+							System.out.println("locked in the trycatch");
+							System.out.println(e);
+						} catch (AWTException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-					}
-				} catch (NoSuchElementException e1) {
-					// TODO Auto-generated catch block
-					System.out.println("Already ITE is Updated");
-				}
-		// Turn Over Details Completed		
-		
-//Avail Preferential Bidder Option		
-				try {
-					driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-					if (driver.findElement(By.xpath(("//a[@title='Avail Preferential Bidder Option']//following-sibling::img[@src='images/action.png']"))).isDisplayed()) {
-						System.out.println("Avail Preferential Bidder Option is Present");
-						driver.findElement(By.xpath(("//a[@title='GTE Details']//following-sibling::img[@src='images/action.png']"))).click();Thread.sleep(500);
-						System.out.println("Avail Preferential Bidder Option is under Processing");
-						try {
-							driver.findElement(By.id("privilegeBidderYes")).click();Thread.sleep(2000);
-							Avail_PrefentialBidder_Document();
-							driver.findElement(By.id("save")).click(); Thread.sleep(500);
-							} catch (NoSuchElementException e) {
-							e.printStackTrace();				
-						}
-					}
-				} catch (NoSuchElementException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-//Avail Preferential Bidder Option Completed	
+					
+					} }
+				
+					}catch (NoSuchElementException e)
+			{
+				System.out.println("fail in table");
+			}
 
 		
 		
