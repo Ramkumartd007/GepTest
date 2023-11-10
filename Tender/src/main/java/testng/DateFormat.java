@@ -26,7 +26,15 @@ public static void main(String[] args) throws ParseException {
 	 int timeHH = Integer.valueOf(timeH);
 	 int timemr123 = ((((Integer.valueOf(timem)/10)+1)*10));
 	 System.out.println(timemr123);
-  	 if(timeHH < 9) {   	  
+	 String da = "01/11/2023";
+	 String day = "01/01/2023";
+	 
+	 Date day123=new SimpleDateFormat("dd/MM/yyyy").parse(da);
+	 System.out.println(day123);
+	
+	// System.out.println(da-1);
+	 
+  	/* if(timeHH < 9) {   	  
    	 System.out.println( "timenow "+  timeH );
    	 System.out.println(date); System.out.println("09"); System.out.println("05"); System.out.println("20");
       	 System.out.println("belowe 9 ");}
@@ -67,7 +75,7 @@ public static void main(String[] args) throws ParseException {
    	 
    	
          }
- 	 
+ 	 */
 	 }
 
     	 
