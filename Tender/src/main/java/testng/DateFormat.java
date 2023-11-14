@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 
 public class DateFormat {
 public static void main(String[] args) throws ParseException {
-	
+	/*
 	 String date= new SimpleDateFormat("dd/MM/YYYY").format(new Date());
 	 String timeH= new SimpleDateFormat("HH").format(new Date());
 	 String timem= new SimpleDateFormat("mm").format(new Date());
@@ -27,11 +27,25 @@ public static void main(String[] args) throws ParseException {
 	 int timemr123 = ((((Integer.valueOf(timem)/10)+1)*10));
 	 System.out.println(timemr123);
 	 String da = "01/11/2023";
+	 String dateram= new SimpleDateFormat("dd/MM/YYYY").format(01/11/2023);
+	 System.out.println(dateram);
 	 String day = "01/01/2023";
 	 
-	 Date day123=new SimpleDateFormat("dd/MM/yyyy").parse(da);
-	 System.out.println(day123);
+	 String dateramnew = new SimpleDateFormat("dd/MM/YYYY").format(01/11/2023);
+	 System.out.println(dateram);
 	
+	 String datekumar = "12/04/2023"; 
+	 Date datekum = new SimpleDateFormat("dd/MM/YYYY").parse(datekumar);
+	 
+	 cal.add(Calendar.DATE,-180);
+	 String DATE1546 = new SimpleDateFormat("dd/MM/YYYY").format(cal.getTime());
+	 */
+	 Date d12  = new Date("12/08/2023"); 
+	 int year = d12.getYear()+1900;
+	 System.out.println("date:"+d12.getDate() );
+	 System.out.println("month:"+d12.getMonth() );
+	 System.out.println("year:"+year );
+	 //System.out.println(date +":"+d12.getDate() );
 	// System.out.println(da-1);
 	 
   	/* if(timeHH < 9) {   	  

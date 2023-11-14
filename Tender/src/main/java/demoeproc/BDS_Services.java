@@ -53,7 +53,7 @@ public class BDS_Services extends BaseClass {
 		Thread.sleep(2000);
 		driver.findElement(By.id("login")).click(); 
 		Thread.sleep(2000);
-		String Tenderid = "2023_NICTD_85467_1";
+		String Tenderid = "2023_NICTD_85493_1";
 		try {  
 			while(driver.findElement(By.id("UserName")).isDisplayed())
 			{
@@ -62,8 +62,8 @@ public class BDS_Services extends BaseClass {
 					Thread.sleep(1000); 
 					driver.findElement(By.id("UserName")).clear();
 					driver.findElement(By.id("Password")).clear();
-					//driver.findElement(By.id("UserName")).sendKeys("bidder6@nic.in");
-					driver.findElement(By.id("UserName")).sendKeys("bidder1@nic.in");
+					driver.findElement(By.id("UserName")).sendKeys("bidder3@nic.in");
+					//driver.findElement(By.id("UserName")).sendKeys("bidder1@nic.in");
 					driver.findElement(By.id("Password")).sendKeys("Admin123$");
 					//driver.findElement(By.id("UserName")).sendKeys("kevin@gmail.com");
 					//driver.findElement(By.id("Password")).sendKeys("Kev0746$");
@@ -584,9 +584,7 @@ try {
 	driver.findElement(By.xpath(("//a[@title='Service Experience Details']//following-sibling::img[@src='images/action.png']"))).click();Thread.sleep(500);
 	System.out.println("Service Experience Details is under Processing");
 		try {
-				String expdate = driver.findElement(By.xpath("//table[@id='workExpView']/tbody/tr[2]/td[8]")).getText().trim(); 
-				System.out.println(expdate);
-				driver.findElement(By.id("expStartDate")).sendKeys(expdate);
+				driver.findElement(By.id("expStartDate")).sendKeys("04/07/2023");
 				driver.findElement(By.id("selectBox")).click(); Thread.sleep(500);
 				driver.findElement(By.id("Verify")).click();
 				System.out.println("Service Experience Details is Updated");
@@ -766,7 +764,7 @@ try {
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 		robot.delay(3000);
 		
-		setClipboardData("C:\\Users\\91991\\Documents\\testing.pdf");	
+		setClipboardData("C:\\Users\\91991\\Documents\\TenderDocument.pdf");	
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
