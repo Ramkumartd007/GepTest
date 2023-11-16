@@ -1,4 +1,4 @@
-package demoeproc;
+package testng;
 
 
 import java.awt.AWTException;
@@ -16,7 +16,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.time.*; 
 
 import javax.imageio.ImageIO;
 
@@ -56,16 +55,15 @@ public class BDS_Services extends BaseClass {
 		driver.findElement(By.id("login")).click(); 
 		Thread.sleep(2000);
 		String Tenderid = "2023_NICTD_85493_1";
-		try { 
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		try {  
 			while(driver.findElement(By.id("UserName")).isDisplayed())
 			{
 				Thread.sleep(1000);
 				try {
-					Thread.sleep(1000);	
+					Thread.sleep(1000); 
 					driver.findElement(By.id("UserName")).clear();
 					driver.findElement(By.id("Password")).clear();
-					driver.findElement(By.id("UserName")).sendKeys("tdrtest@nic.in");
+					driver.findElement(By.id("UserName")).sendKeys("bidder2@nic.in");
 					//driver.findElement(By.id("UserName")).sendKeys("bidder1@nic.in");
 					driver.findElement(By.id("Password")).sendKeys("Admin123$");
 					//driver.findElement(By.id("UserName")).sendKeys("kevin@gmail.com");
@@ -140,7 +138,7 @@ public class BDS_Services extends BaseClass {
 		Work_BOQ = BOQ.getText().replace(".xls","");	
 		System.out.println(Work_BOQ);Thread.sleep(200);
 		driver.findElement(By.xpath("//input[@class = 'customButton']")).click();
-		Thread.sleep(500);
+		
 		try {
 			
 			if(driver.findElement(By.id("selectcheckbox")).isDisplayed()) {
@@ -157,25 +155,20 @@ public class BDS_Services extends BaseClass {
 			Thread.sleep(1000);
 //GST Code			            
 		try {
-			try {
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);				
-				if(driver.findElement(By.xpath("//*[contains(text(),'GST Number-Name')]")).isDisplayed())
-				{
-					selection(driver.findElement(By.id("gstCode")),"byValue", "1");Thread.sleep(200);
-					driver.findElement(By.id("Next")).click();Thread.sleep(500);
-					System.out.println("GST updated");
-				}
-				} catch (NoSuchElementException e3) {
-				// TODO Auto-generated catch block
-					driver.findElement(By.id("Next")).click();
-					System.out.println("user profile updated");	
-					Thread.sleep(500);
-				e3.printStackTrace();
-				}
-		} catch (NoSuchElementException e) {
+			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);				
+			if(driver.findElement(By.xpath("//*[contains(text(),'GST Number-Name')]")).isDisplayed())
+			{
+				selection(driver.findElement(By.id("gstCode")),"byValue", "1");Thread.sleep(200);
+				driver.findElement(By.id("Next")).click();Thread.sleep(500);
+				System.out.println("GST updated");
+			}
+			} catch (NoSuchElementException e3) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+				driver.findElement(By.id("Next")).click();
+				System.out.println("user profile updated");	
+				Thread.sleep(500);
+			e3.printStackTrace();
+			}
 	
 		Thread.sleep(1000);
 		try {driver.findElement(By.id("Next")).click();Thread.sleep(500);System.out.println("TenderExemp is no");} catch (NoSuchElementException e){System.out.println("No Tender Exemption");}
@@ -419,7 +412,7 @@ public class BDS_Services extends BaseClass {
 										Thread.sleep(1000);
 										
 											System.out.println("ITE is Present");
-											driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+											Thread.sleep(500);
 											driver.findElement(By.xpath(("//a[@title='ITE Details']//following-sibling::img[@src='images/action.png']"))).click();
 											
 											Thread.sleep(1500);
@@ -467,7 +460,7 @@ public class BDS_Services extends BaseClass {
 								try {
 									Thread.sleep(1000);
 										System.out.println("Work Experience Details is Present");
-										driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+										Thread.sleep(500);
 										driver.findElement(By.xpath(("//a[@title='Work Experience Details']//following-sibling::img[@src='images/action.png']"))).click();
 										
 										Thread.sleep(1500);
@@ -511,7 +504,7 @@ else if (TOD&&TOD1)
 								try {
 									Thread.sleep(1000);
 									System.out.println("Turn Over Details");
-									driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+										Thread.sleep(500);
 										driver.findElement(By.xpath(("//a[@title='Turn Over Details']//following-sibling::img[@src='images/action.png']"))).click();
 										
 										Thread.sleep(1500);
@@ -538,7 +531,6 @@ else if (AVP&&AVP1)
 								{		
 								try {
 										System.out.println("Avail Preferential Bidder Option is Present");
-										driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 										driver.findElement(By.xpath(("//a[@title='GTE Details']//following-sibling::img[@src='images/action.png']"))).click();Thread.sleep(500);
 										System.out.println("Avail Preferential Bidder Option is under Processing");
 										try {
@@ -563,7 +555,6 @@ else if (WCD&&WCD1)
 try {
 	Thread.sleep(1000);
 	System.out.println("Working Capital Details is Present");
-	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	driver.findElement(By.xpath(("//a[@title='Working Capital Details']//following-sibling::img[@src='images/action.png']"))).click();Thread.sleep(500);
 	System.out.println("Working Capital Details is under Processing");
 		try {
@@ -591,22 +582,26 @@ else if (SED)
 try {
 	Thread.sleep(1000);
 	System.out.println("Working Capital Details is Present");
-	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	driver.findElement(By.xpath(("//a[@title='Service Experience Details']//following-sibling::img[@src='images/action.png']"))).click();Thread.sleep(500);
 	System.out.println("Service Experience Details is under Processing");
 		try {
 				String PED = driver.findElement(By.xpath("//table[@id='workExpView']/tbody/tr[2]/td[8]")).getText();
-				  Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(PED);
-				     Calendar c = Calendar.getInstance(); 
-				     c.setTime(date1); 
-				     c.add(Calendar.MONTH, -3);
-				     Date d = c.getTime();
-				     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-				     String Expdate = format.format(d);
-				     System.out.println("Expdate: "+Expdate);
-				 
+				 Date d12  = new Date(PED);  
+				 int year = d12.getYear()+1900;
+				 int Month = d12.getDate()-3;
+				 int Date = d12.getMonth()+1;
+				 String Expdate;
+				 System.out.println(Date+"/"+Month+"/"+year);
+					 
+				 if(Integer.valueOf(Date)>2)
+				 {
+					Expdate = "0"+Date;
+				 }else {
+					 
+					Expdate = ""+Date;
+				 }
 				 System.out.println(Expdate);
-				driver.findElement(By.id("expStartDate")).sendKeys(Expdate);
+				driver.findElement(By.id("expStartDate")).sendKeys(Expdate+"/"+Month+"/"+year);
 				driver.findElement(By.id("selectBox")).click(); Thread.sleep(500);
 				driver.findElement(By.id("Verify")).click();
 				System.out.println("Service Experience Details is Updated");
@@ -629,7 +624,6 @@ else if (RD)
 try {
 	Thread.sleep(1000);
 	System.out.println("Resource Details");
-	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	driver.findElement(By.xpath(("//a[@title='Resource Details']//following-sibling::img[@src='images/action.png']"))).click();Thread.sleep(500);
 	System.out.println("Resource Details is under Processing");
 		try {
@@ -656,7 +650,6 @@ else if (BCD)
 try {
 	Thread.sleep(1000);
 	System.out.println("Bid Capacity Details");
-	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	driver.findElement(By.xpath(("//a[@title='Bid Capacity Details']//following-sibling::img[@src='images/action.png']"))).click();Thread.sleep(500);
 	System.out.println("Bid Capacity Details is under Processing");
 		try {

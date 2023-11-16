@@ -19,4 +19,8 @@
 			<AppenderRef ref="file" />
 		</Root>
 	</Loggers>
+	
+    <logger name="org.apache" level="WARN" />
+    <logger name="httpclient" level="WARN" /> 
+
 </Configuration>

@@ -2,13 +2,16 @@ package testng;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
-
+import java.time.*;
+import java.time.format.DateTimeFormatter; 
 import org.openqa.selenium.By;
 
 public class DateFormat {
 public static void main(String[] args) throws ParseException {
+	final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY"); 
 	/*
 	 String date= new SimpleDateFormat("dd/MM/YYYY").format(new Date());
 	 String timeH= new SimpleDateFormat("HH").format(new Date());
@@ -38,13 +41,43 @@ public static void main(String[] args) throws ParseException {
 	 Date datekum = new SimpleDateFormat("dd/MM/YYYY").parse(datekumar);
 	 
 	 cal.add(Calendar.DATE,-180);
-	 String DATE1546 = new SimpleDateFormat("dd/MM/YYYY").format(cal.getTime());
-	 */
-	 Date d12  = new Date("12/08/2023"); 
+	 String DATE1546 = new SimpleDateFormat("dd/MM/YYYY").format(cal.getTime());*/
+	/* Date date1=new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2023");          
+     System.out.println("date: "+date1);         
+     Calendar c = Calendar.getInstance(); 
+     c.setTime(date1); 
+     c.add(Calendar.MONTH, -3);
+     Date d = c.getTime();
+     System.out.println("d: "+d);         
+     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+     String res = format.format(d);
+     System.out.println("res: "+res);  */  
+    String ped = "25/08/2023";
+    System.out.println("Date received: "+ped);
+     Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(ped);
+     Calendar c = Calendar.getInstance(); 
+     c.setTime(date1); 
+     c.add(Calendar.MONTH, -3);
+     Date d = c.getTime();
+     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+     String res = format.format(d);
+     System.out.println("Date changed : "+res);   
+    
+	 /*
+	// String DATE1546 = new SimpleDateFormat("dd/MM/YYYY").format(Exp);	 
+	 Date d12  = new Date(Exp); 
 	 int year = d12.getYear()+1900;
-	 System.out.println("date:"+d12.getDate() );
-	 System.out.println("month:"+d12.getMonth() );
-	 System.out.println("year:"+year );
+	 int Month = d12.getDate();
+	 int Date = d12.getMonth()+1;
+	
+	 String ExpDate;
+	 String ExpMon;
+	 System.out.println(Date+":"+Month+":"+year);
+	 if(Integer.valueOf(Date).bitCount(Date)<2){ ExpDate = "0"+Date;}else {ExpDate = ""+Date;}
+	 if(Integer.valueOf(Month).bitCount(Month)<2){ ExpMon = "0"+Month;}else {ExpMon = ""+Month;}
+	 
+	 System.out.println(ExpDate+"/"+ExpMon+"/"+year);
+	 
 	 //System.out.println(date +":"+d12.getDate() );
 	// System.out.println(da-1);
 	 
