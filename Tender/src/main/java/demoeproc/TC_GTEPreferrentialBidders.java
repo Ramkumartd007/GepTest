@@ -76,7 +76,8 @@ public class TC_GTEPreferrentialBidders extends BaseClass {
 		System.setProperty("webdriver.gecko.driver",
 					"C:\\Users\\91991\\eclipse-workspace\\com\\Driver\\geckodriver.exe");
 		WebDriver driver = new FirefoxDriver();
-		driver.get("https://demoetenders.tn.nic.in/nicgep/app");
+	//	driver.get("https://demoetenders.tn.nic.in/nicgep/app");
+		driver.get("https://demoeproc.nic.in/nicgep/app");
 		driver.manage().window().maximize();
 		Thread.sleep(3000);
 		driver.findElement(By.id("login")).click(); 

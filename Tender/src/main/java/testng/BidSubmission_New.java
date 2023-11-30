@@ -101,7 +101,7 @@ import org.openqa.selenium.NoSuchElementException;
 			Thread.sleep(2000);
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			driver.findElement(By.id("PageLink_3")).click(); Thread.sleep(3000);
-			driver.findElement(By.id("tenderId")).sendKeys("2023_NIC_9725_1");
+			driver.findElement(By.id("tenderId")).sendKeys("2023_NIC_10020_1");
 			driver.findElement(By.id("submit")).click();Thread.sleep(2000);
 			driver.findElement(By.id("Checkbox")).click();
 			driver.findElement(By.id("save")).click();Thread.sleep(2000);
@@ -114,7 +114,7 @@ import org.openqa.selenium.NoSuchElementException;
 		try {		
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			driver.findElement(By.id("PageLink_0_8")).click();Thread.sleep(3000);
-			driver.findElement(By.id("TenderID")).sendKeys("2023_NIC_9725_1");
+			driver.findElement(By.id("TenderID")).sendKeys("2023_NIC_10020_1");
 			driver.findElement(By.id("search")).click(); Thread.sleep(2000);	
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.findElement(By.id("DirectLink_0")).click();Thread.sleep(2000);/*

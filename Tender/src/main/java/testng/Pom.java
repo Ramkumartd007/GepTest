@@ -13,7 +13,7 @@ public class Pom {
 	PageFactory.initElements(driver2, this);
 	}
 	
-	@FindBy(id="DirectLink_11") private WebElement bidEnroll;
+	@FindBy(id="DirectLink_17") private WebElement bidEnroll;
 	@FindBy(id="EmailId") private WebElement loginId;
 	@FindBy(id="Email") private WebElement corrEmail;
 	@FindBy(id="mobileIsdCode") private WebElement std;

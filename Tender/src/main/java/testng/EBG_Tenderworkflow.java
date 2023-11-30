@@ -41,7 +41,7 @@ import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
-public class TC_ServicesFlow extends BaseClass {
+public class EBG_Tenderworkflow extends BaseClass {
 
 	public static WebDriver driver;
 
@@ -121,7 +121,7 @@ public class TC_ServicesFlow extends BaseClass {
 				driver.findElement(By.id("CaptchaText")).sendKeys(x);
 				Thread.sleep(1500);
 				driver.findElement(By.id("submitSHA")).click();
-				System.out.println("Sucessful - First Login");
+				System.out.println("Successful - First Login");
 				System.out.println("Available");
 				Thread.sleep(1000);
 		    	  } 
@@ -153,7 +153,7 @@ public class TC_ServicesFlow extends BaseClass {
 		selection(driver.findElement(By.name("bidOpenerType")), "ByIndex", bidOpenerType);
 		try {
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			driver.findElement(By.xpath("//input[@id='mclAllowed'][@value = '0']")).click();
+			driver.findElement(By.xpath("//input[@id='mclAllowed'][@value = '1']")).click();
 		} catch (NoSuchElementException e) {
 		
 			// TODO Auto-generated catch block
@@ -180,7 +180,7 @@ public class TC_ServicesFlow extends BaseClass {
 		
 		try {
 			driver.findElement(By.id("Next")).click();
-			System.out.println("Sucessful - Basic details");
+			System.out.println("Successful - Basic details");
 			Thread.sleep(1000);
 		} catch (Exception e4) {
 			// TODO Auto-generated catch block
@@ -207,11 +207,11 @@ public class TC_ServicesFlow extends BaseClass {
 			driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 			driver.findElement(By.id("Next")).click();
 			Thread.sleep(300);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-			System.out.println("Sucessful - Cover details");
+			System.out.println("Successful - Cover details");
 		} catch (Exception e3) {
 			// TODO Auto-generated catch block
 			e3.printStackTrace();
-			System.out.println("Unsucessful - Cover details");
+			System.out.println("UnSuccessful - Cover details");
 		}
 		
 		// NIT Document
@@ -220,13 +220,13 @@ public class TC_ServicesFlow extends BaseClass {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);	
 		if (driver.findElement(By.id("DirectLink_2")).isDisplayed())
 		{ Thread.sleep(1000);
-		driver.findElement(By.id("DirectLink_2")).click();
+	/*	driver.findElement(By.id("DirectLink_2")).click();
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		driver.findElement(By.id("description")).sendKeys("NIT");
 		UploadNit();
 		Thread.sleep(1000);
 		driver.findElement(By.id("save")).click();
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);*/
 		driver.findElement(By.id("DirectLink_0")).click();
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		driver.findElement(By.id("checkbox4")).click();
@@ -234,7 +234,7 @@ public class TC_ServicesFlow extends BaseClass {
 		driver.findElement(By.id("Verifysave")).click();
 		Thread.sleep(500);
 		driver.findElement(By.id("DirectLink_3")).click();
-		System.out.println("Sucessful - NIT Document verified");
+		System.out.println("Successful - NIT Document verified");
 	 	}
 		}
 		catch (NoSuchElementException e)
@@ -245,13 +245,15 @@ public class TC_ServicesFlow extends BaseClass {
 			driver.findElement(By.id("Verifysave")).click();
 			Thread.sleep(500);
 			driver.findElement(By.id("DirectLink_3")).click();
-			System.out.println("Sucessful - NIT Document verified");
+			System.out.println("Successful - NIT Document verified");
 		}
 		
 					
 		// Work/Item Details
 		Thread.sleep(1500);
 		try {
+			Thread.sleep(200);
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);	
 			driver.findElement(By.id("txtTenderTitle")).sendKeys(Title);
 			driver.findElement(By.id("txtWorkDesc")).sendKeys(Title);
 			driver.findElement(By.id("txtPreQual")).sendKeys(Title);
@@ -291,11 +293,11 @@ public class TC_ServicesFlow extends BaseClass {
 			System.out.println("Select issue");
 		}
 		
-		
+		/*
 	//Service Experience	
 		try {
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			driver.findElement(By.xpath("//input[@id='mclServiceAllowed'][@value = '0']")).click();
+			driver.findElement(By.xpath("//input[@id='mclServiceAllowed'][@value = '1']")).click();
 			System.out.println("mclServiceAllowed is Enabled");
 		} catch (NoSuchElementException e) {
 		
@@ -305,7 +307,7 @@ public class TC_ServicesFlow extends BaseClass {
 	//Resource Details	
 		try {
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			driver.findElement(By.xpath("//input[@id='mclFleetAllowed'][@value = '0']")).click();
+			driver.findElement(By.xpath("//input[@id='mclFleetAllowed'][@value = '1']")).click();
 			System.out.println("mclFleetAllowed is Enabled");
 		} catch (NoSuchElementException e) {
 		
@@ -316,14 +318,14 @@ public class TC_ServicesFlow extends BaseClass {
 	//Working Capital	
 		try {
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			driver.findElement(By.xpath("//input[@id='mclWorkingCapitalAllowed'][@value = '0']")).click();
+			driver.findElement(By.xpath("//input[@id='mclWorkingCapitalAllowed'][@value = '1']")).click();
 			System.out.println("mclWorkingCapitalAllowed is Enabled");
 		} catch (NoSuchElementException e) {
 		
 			// TODO Auto-generated catch block
 			System.out.println("mclWorkingCapitalAllowed is Disabled");
 		}
-		
+		*/
 		
 		
 		try {
@@ -350,7 +352,7 @@ public class TC_ServicesFlow extends BaseClass {
 		 	}
 		try {
 			driver.findElement(By.id("Next")).click();
-			System.out.println("Sucessful - Work/Item Details");
+			System.out.println("Successful - Work/Item Details");
 			}
 			catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -360,15 +362,26 @@ public class TC_ServicesFlow extends BaseClass {
 		// Fee Details
 		try {
 			Thread.sleep(500);
-			driver.findElement(By.id("TenderFee")).clear();
-			driver.findElement(By.id("EMDFiexedAmt")).clear(); Thread.sleep(300);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-			driver.findElement(By.id("TenderFee")).sendKeys("100");
-			driver.findElement(By.id("EMDFiexedAmt")).sendKeys("1000");
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			if (driver.findElement(By.xpath("//input[@id='TenderFee'][@disabled='disabled']")).isDisplayed()) 
+			{
+			driver.findElement(By.id("chkOffLine")).click();
+			driver.findElement(By.id("chkOnLine")).click();Thread.sleep(200);
+			driver.findElement(By.id("bgYes")).click(); Thread.sleep(200);
+			driver.findElement(By.id("minDirectAmount")).sendKeys("500");
 			driver.findElement(By.id("Next")).click();
-			System.out.println("Sucessful - Fee Details");
+			System.out.println("Successful - Fee Details");
+			}
+			else {
+				driver.findElement(By.id("TenderFee")).clear();
+				driver.findElement(By.id("EMDFiexedAmt")).clear(); Thread.sleep(300);driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+				driver.findElement(By.id("TenderFee")).sendKeys("100");
+				driver.findElement(By.id("EMDFiexedAmt")).sendKeys("1000");
+				driver.findElement(By.id("Next")).click();
+				System.out.println("Successful - Fee Details");
+			}
 			} catch (NoSuchElementException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				e.printStackTrace();
 			} finally {
 			System.out.println("Any other issue");
 			}
@@ -550,7 +563,7 @@ public class TC_ServicesFlow extends BaseClass {
 			System.out.println("No Alert");;
 		}
 		Thread.sleep(1500);
-		System.out.println("Sucessful - Critical Date");
+		System.out.println("Successful - Critical Date");
 		
 		// Bid openers List
 		try {
@@ -559,7 +572,7 @@ public class TC_ServicesFlow extends BaseClass {
 		driver.findElement(By.xpath("//td[text()='badhri@nic.in']//following-sibling::td//input")).click();
 		driver.findElement(By.xpath("//td[text()='sakthi@nic.in']//following-sibling::td//input")).click();
 		driver.findElement(By.id("Submit")).click();
-		System.out.println("Sucessful - Bid openers List");
+		System.out.println("Successful - Bid openers List");
 		} catch (NoSuchElementException e) {
 			// TODO Auto-generated catch block
 			System.out.println("No Bid Openers");;
@@ -578,25 +591,25 @@ public class TC_ServicesFlow extends BaseClass {
 			driver.findElement(By.id("description")).sendKeys("BOQ - Price Bid");
 			Thread.sleep(1500);
 			ItemWiseTemplate();
-			System.out.println("sucessful - BOQ Upload ");
-			System.out.println("sucessful - BOQ Signed");
+			System.out.println("Successful - BOQ Upload ");
+			System.out.println("Successful - BOQ Signed");
 						
 			driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 			driver.findElement(By.id("save")).click();
-			System.out.println("sucessful - BOQ Saved ");
+			System.out.println("Successful - BOQ Saved ");
 			Thread.sleep(500);
 			driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 			driver.findElement(By.id("DirectLink_1")).click();
 			Thread.sleep(1500);
 			//driver.findElement(By.id("ViewBOQCheck")).click();
-			//System.out.println("sucessful - BOQ Checked");s
+			//System.out.println("Successful - BOQ Checked");s
 			//Thread.sleep(1500);
 			driver.findElement(By.id("checkbox4")).click();
 			driver.findElement(By.id("Verifysave")).click();
 			Thread.sleep(500);
 			driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 			driver.findElement(By.id("DirectLink_4")).click();
-			System.out.println("sucessful - BOQ Uploading Stage Completed");
+			System.out.println("Successful - BOQ Uploading Stage Completed");
 			Thread.sleep(1500);
 		} catch (NoSuchElementException e1) {
 			// TODO Auto-generated catch block
@@ -634,11 +647,11 @@ public class TC_ServicesFlow extends BaseClass {
 		// OID Documents List
 		try {
 			driver.findElement(By.id("save")).click();
-			System.out.println("sucessful - OID Stage Completed");
+			System.out.println("Successful - OID Stage Completed");
 			Thread.sleep(500);
 		} catch (NoSuchElementException e) {
 			driver.findElement(By.id("Next")).click();
-			System.out.println("sucessful - OID Stage Completed");
+			System.out.println("Successful - OID Stage Completed");
 		}
 		Thread.sleep(1500);
 
@@ -679,7 +692,7 @@ public class TC_ServicesFlow extends BaseClass {
 	    String Tenderid= null;
 	    try {
 			driver.findElement(By.id("Submit")).click();
-			System.out.println("sucessful - Tender Send to Publish");
+			System.out.println("Successful - Tender Send to Publish");
 			Thread.sleep(1500);
 			WebElement id = driver.findElement(By.xpath("//table[@class='message_box']/tbody/tr[9]/td/b/span/span/b"));
 			Tenderid = id.getText();

@@ -55,7 +55,7 @@ public class BDS_Services extends BaseClass {
 		Thread.sleep(2000);
 		driver.findElement(By.id("login")).click(); 
 		Thread.sleep(2000);
-		String Tenderid = "2023_NICTD_85493_1";
+		String Tenderid = "2023_NICTD_85583_1";
 		try { 
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			while(driver.findElement(By.id("UserName")).isDisplayed())
