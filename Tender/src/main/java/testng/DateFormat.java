@@ -9,6 +9,8 @@ import java.time.*;
 import java.time.format.DateTimeFormatter; 
 import org.openqa.selenium.By;
 
+import groovyjarjarantlr4.v4.parse.ANTLRParser.exceptionGroup_return;
+
 public class DateFormat {
 public static void main(String[] args) throws ParseException {
 	final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY"); 
@@ -41,7 +43,7 @@ public static void main(String[] args) throws ParseException {
 	 Date datekum = new SimpleDateFormat("dd/MM/YYYY").parse(datekumar);
 	 
 	 cal.add(Calendar.DATE,-180);
-	 String DATE1546 = new SimpleDateFormat("dd/MM/YYYY").format(cal.getTime());*/
+	 String DATE1546 = new SimpleDateFormat("dd/MM/YYYY").format(cal.getTime());
 	/* Date date1=new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2023");          
      System.out.println("date: "+date1);         
      Calendar c = Calendar.getInstance(); 
@@ -51,7 +53,7 @@ public static void main(String[] args) throws ParseException {
      System.out.println("d: "+d);         
      SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
      String res = format.format(d);
-     System.out.println("res: "+res);  */  
+     System.out.println("res: "+res);    
     String ped = "25/08/2023";
     System.out.println("Date received: "+ped);
      Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(ped);
@@ -63,7 +65,8 @@ public static void main(String[] args) throws ParseException {
      String res = format.format(d);
      System.out.println("Date changed : "+res);   
     
-	 /*
+	*/
+	/*
 	// String DATE1546 = new SimpleDateFormat("dd/MM/YYYY").format(Exp);	 
 	 Date d12  = new Date(Exp); 
 	 int year = d12.getYear()+1900;
@@ -123,9 +126,66 @@ public static void main(String[] args) throws ParseException {
    	
          }
  	 */
-	 }
+	String EMDexmpt= null;
+	String EMD= null;
+	String TFexmpt = null;
+	String TF= null;
+	String e_BG= null;
+	for (int i = 1; i < 20; i++) {
+		 // if (i % 11 == 2) continue;
+		  //do stuff
+		
+try {
+	
+	if (i <= 8 || i >= 15 && i <= 18) {
+		TF = "TF-Yes";
+	} else if (i >= 9 && i <= 14) {
+		TF = "TF-No";
+	}
+
+//Tender Fee Exemption				
+	
+	if (i <= 4 || i == 16 || i == 17) {
+		TFexmpt = "TF Exempt-Yes";
+	} else if (i >= 5 && i <= 15|| i == 18 ) {
+		TFexmpt = "TF Exempt-No";
+	}
+
+//EMD Fee
+	
+	if (i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 7 || i == 8 || i == 11 || i == 12
+			|| i == 13 || i == 14) {
+		EMD = "EMD-Yes";
+	} else if (i == 16 || i == 17 || i == 15 || i == 18 || i == 9 || i == 10) {
+		EMD = "EMD-No";
+	}
+
+//EMD Fee Exemption	
+	
+	if (i == 1 || i == 2 || i == 5 || i == 6 || i == 11 || i == 12) {
+		EMDexmpt = "EMD Exempt-Yes";
+	} else if (i == 3 || i == 4 || i == 7 || i == 8 || i == 13 || i == 14 || i == 16 || i == 17 || i == 15
+			|| i == 18 || i == 9 || i == 10) {
+		EMDexmpt = "EMD Exempt-No";
+	}
+
+//e-BG 	
+	
+	if (i == 1 || i == 3 || i == 5 || i == 7 || i == 10 || i == 11 || i == 13 || i == 16 || i == 18) {
+		e_BG = "BG-Yes";
+	} else if (i == 2 || i == 4 || i == 6 || i == 8 || i == 9 || i == 12 || i == 14 || i == 15 || i == 17) {
+		e_BG = "BG-No";
+	}
+System.out.println(i+ " : "+TF+ " -> "+TFexmpt+ " -> "+EMD+ " -> "+EMDexmpt+ " -> "+e_BG);
+
+}catch (Exception e)
+{
+	System.out.println(e);}
+	}
+		  }
+	}
 
     	 
-}
+
 
  				 
