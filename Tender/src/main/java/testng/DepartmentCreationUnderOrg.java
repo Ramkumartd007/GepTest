@@ -23,14 +23,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
 public class DepartmentCreationUnderOrg extends BaseClass {
 	public static void main(String[] args)  throws InterruptedException, AWTException, TesseractException, IOException  {
-		System.setProperty("webdriver.gecko.driver","C:\\Users\\91991\\eclipse-workspace\\com\\Driver\\geckodriver.exe");
-		WebDriver driver = new FirefoxDriver();
+	/*	System.setProperty("webdriver.gecko.driver","C:\\Users\\91991\\eclipse-workspace\\com\\Driver\\geckodriver.exe");
+		WebDriver driver = new FirefoxDriver();*/
 		Xls_Reader reader = new Xls_Reader("C:\\Users\\91991\\Documents\\HRANC\\HRANC.xls");
 		
 		
@@ -39,7 +40,7 @@ public class DepartmentCreationUnderOrg extends BaseClass {
 		String Dept;
 		String Div;
 		String Sdiv;
-		
+		/*
 		
 			//String url2 = reader.getCellData(sheetName, "URL2" , j);
 			driver.get("https://demoeproc.nic.in/nicgep/app");
@@ -105,13 +106,14 @@ public class DepartmentCreationUnderOrg extends BaseClass {
 		Thread.sleep(2000);
 		driver.findElement(By.id("search")).click();
 		Thread.sleep(2000);
-					
+				*/
 					
 		for (int j = 2; j <= 7; j++) {
 			Dept = reader.getCellData(sheetName,"Dept", j);
 			Div = reader.getCellData(sheetName,"Div", j);
 			Sdiv = reader.getCellData(sheetName,"Sdiv", j);
-			try {
+			System.out.println(Dept);
+			/*try {
 				driver.findElement(By.id("bd")).click();
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			//	driver.findElement(By.id("deptLevelOption")).click();	Thread.sleep(500);
@@ -164,8 +166,9 @@ public class DepartmentCreationUnderOrg extends BaseClass {
 			}
 								
 	    
+			
 		Thread.sleep(2000);
-		
+		*/
 		
 		}
 		}

@@ -64,7 +64,7 @@ public class BidOpenig extends BaseClass {
 	   String timer60 = String.valueOf(timemr-60);
 	   String timer560 = String.valueOf(timemr5-60);
 	  	 
-	    String Tenderid = "2023_NICT_9899_1";
+	    String Tenderid = "2023_NIC_10082_2";
 	  	
 	  	 
 		Properties prop = new Properties();

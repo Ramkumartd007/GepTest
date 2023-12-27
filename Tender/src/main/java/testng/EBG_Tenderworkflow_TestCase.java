@@ -43,7 +43,7 @@ import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
-public class EBG_Tenderworkflow extends BaseClass {
+public class EBG_Tenderworkflow_TestCase extends BaseClass {
 
 	public static WebDriver driver;
 
@@ -78,16 +78,18 @@ public class EBG_Tenderworkflow extends BaseClass {
 		String formContract = "Supply";
 		String noOfPackets = "2";
 		String tenderCategory = "Goods";
-		String bidOpenerType = "1";
+		String bidOpenerType = "2";
 
 		String EMD = null;
 		String TFexmpt = null;
 		String EMDexmpt = null;
 		String TF = null;
+		String PF = null;
 		String e_BG = null;
 		String Tenderid = null;
-		//String BasicId = null;
-		String BasicId = "2023_NIC_10106";
+		String MDP = null;
+		String BasicId = null;
+		//String BasicId = "2023_NIC_10163";
 
 		Properties prop = new Properties();
 		FileInputStream input = new FileInputStream("src\\main\\java\\itemwise\\config.properties");
@@ -95,19 +97,19 @@ public class EBG_Tenderworkflow extends BaseClass {
 		System.setProperty("webdriver.gecko.driver",
 				"C:\\Users\\91991\\eclipse-workspace\\com\\Driver\\geckodriver.exe");
 		WebDriver driver = new FirefoxDriver();
-		Xls_Reader reader = new Xls_Reader("C:\\Users\\91991\\Documents\\HRANC\\HRANC.xls");
+		Xls_Reader reader = new Xls_Reader("D:\\Test_Scenario_Excel\\EBG_TestCase.xls");
 		
 		
-		String sheetName = "HRANCN";
+		String sheetName = "Test_Cases";
 		String TenderFee;
 		String TenderFeewithEX;
+		String ProcessingFee;
 		String EMDFee;
 		String EMDFeewithEX;
-		String BG;
-		String BG_MDP0;
-		String BG_MDP;
-		String EBG_MDP;
-		String EBG_MDP0;
+		String eBG;
+		String MDP0;
+		String EBGmdp;
+		String Case;
 		
 		driver.get("https://demoetenders.tn.nic.in/nicgep/app");
 		// driver.get("https://demoeproc.nic.in/nicgep/app");
@@ -161,57 +163,78 @@ public class EBG_Tenderworkflow extends BaseClass {
 		}
 		Thread.sleep(2000);
 		Robot1();
-		for (int i = 7; i < 19; i++) {
-			Thread.sleep(1000);
-			if (i % 11 == 10) continue;if (i % 11 == 16) continue;if (i % 11 == 18) continue;
-		//	if (i % 11 == 2) continue;if (i % 11 == 2) continue;if (i % 11 == 2) continue;
+		for (int i = 2; i < 50; i++) {
+			Thread.sleep(500);
+			
+			TenderFee = reader.getCellData(sheetName,"Tender FEE", i);
+			TenderFeewithEX = reader.getCellData(sheetName,"Tender FEE Exempt", i);
+			ProcessingFee = reader.getCellData(sheetName,"Processing FEE", i);
+			EMDFee = reader.getCellData(sheetName,"EMD FEE", i);
+			EMDFeewithEX = reader.getCellData(sheetName,"EMD FEE Exempt", i);
+			
+			eBG = reader.getCellData(sheetName,"E-BG", i);
+			MDP0 = reader.getCellData(sheetName,"MDP", i);
+			EBGmdp = reader.getCellData(sheetName,"E-BG", i);
+			Case = reader.getCellData(sheetName, "Case", i);
+			System.out.println(TenderFee+TenderFeewithEX+ProcessingFee+EMDFee+EMDFeewithEX+eBG+MDP0+EBGmdp+Case);
+//Tender Fee				
 			try {
-				if (i == 1 || i == 2 || i == 3 || i == 4 || i == 16 || i == 17 || i == 5 || i == 6 || i == 7 || i == 8
-						|| i == 15 || i == 18) {
+				if (TenderFee.equals("YES")) {
 					TF = "TF-Yes";
-				} else if (i == 9 || i == 10 || i == 11 || i == 12 || i == 13 || i == 14) {
+				} else if (TenderFee.equals("NO")) {
 					TF = "TF-No";
+				}
+			
+//Processing Fee				
+				
+				if (ProcessingFee.equals("YES")) {
+					PF = "PF-Yes";
+				} else if (ProcessingFee.equals("NO")) {
+					PF = "PF-No";
 				}
 
 //Tender Fee Exemption				
-				if (i == 1 || i == 2 || i == 3 || i == 4 || i == 16 || i == 17) {
+				if (TenderFeewithEX.equals("YES")) {
 					TFexmpt = "TF Exempt-Yes";
-				} else if (i == 5 || i == 6 || i == 7 || i == 8 || i == 15 || i == 18 || i == 9 || i == 10 || i == 11
-						|| i == 12 || i == 13 || i == 14) {
+				} else if (TenderFeewithEX.equals("NO")) {
 					TFexmpt = "TF Exempt-No";
 				}
 
 //EMD Fee
-				if (i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 7 || i == 8 || i == 11 || i == 12
-						|| i == 13 || i == 14) {
+				if (EMDFee.equals("YES")) {
 					EMD = "EMD-Yes";
-				} else if (i == 16 || i == 17 || i == 15 || i == 18 || i == 9 || i == 10) {
+				} else if (EMDFee.equals("NO")) {
 					EMD = "EMD-No";
 				}
 
 //EMD Fee Exemption	
-				if (i == 1 || i == 2 || i == 5 || i == 6 || i == 11 || i == 12) {
+				if (EMDFeewithEX.equals("YES")) {
 					EMDexmpt = "EMD Exempt-Yes";
-				} else if (i == 3 || i == 4 || i == 7 || i == 8 || i == 13 || i == 14 || i == 16 || i == 17 || i == 15
-						|| i == 18 || i == 9 || i == 10) {
+				} else if (EMDFeewithEX.equals("NO")) {
 					EMDexmpt = "EMD Exempt-No";
 				}
 
 //e-BG 	
-				if (i == 1 || i == 3 || i == 5 || i == 7 || i == 10 || i == 11 || i == 13 || i == 16 || i == 18) {
-					e_BG = "BG-Yes";
-				} else if (i == 2 || i == 4 || i == 6 || i == 8 || i == 9 || i == 12 || i == 14 || i == 15 || i == 17) {
-					e_BG = "BG-No";
+				if (eBG.equals("YES")) {
+					e_BG = "eBG-Yes";
+				} else if (eBG.equals("NO")) {
+					e_BG = "eBG-No";
 				}
-			
+//MDP 	
+				if (MDP0.equals("eBG = 0")) {
+					e_BG = "MDP-Yes";
+				} else if (MDP0.equals("eBG> 0")) {
+					e_BG = "MDP-No";
+				}
+				
 
-			String Title = "Ver.21/ " + date + " /e-BG/" + TF + "/ " + TFexmpt + "/ " + EMD + "/ " + EMDexmpt + "/ "
-					+ e_BG + "/ " + "TestScenario_" + i;
-			String TRef = "Ver.21/ " + date + " /e-BG/" + e_BG + "/ TestScenario";
+			//String Title = "Ver.21/ " + date + " /e-BG/" + TF + "/ " + TFexmpt + "/ " + EMD + "/ " + EMDexmpt + "/ " + e_BG + "/ " + "TestScenario_" + i;
+			String Title = reader.getCellData(sheetName, "Case", i);
+				String TRef = "Ver.21/ " + date + " /e-BG" + "/ TestScenario";
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.findElement(By.xpath("//a[text() = 'Create Tender / Tender List']")).click();
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-			if(i==1)
+			if(i==2)
 			{
 			driver.findElement(By.id("bd")).click();
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -430,52 +453,65 @@ public class EBG_Tenderworkflow extends BaseClass {
 			}
 
 			// Fee Details
+			
 			try {
 				Thread.sleep(500);
 				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+				
 				driver.findElement(By.id("chkOffLine")).click();
 				driver.findElement(By.id("chkOnLine")).click();
 				Thread.sleep(200);
-				if(i==9)
+			/*	if(i==9||(i>=43&&i<=66))
 				{
 					driver.findElement(By.id("chkOnLine")).click();
 					driver.findElement(By.id("NotApplicable")).click();	
 				}
-
+*/
 //Tender Fee
-				if (i == 1 || i == 2 || i == 3 || i == 4 || i == 16 || i == 17 || i == 5 || i == 6 || i == 7 || i == 8
-						|| i == 15 || i == 18) {
+				if (TenderFee.equals("YES")) {
 					driver.findElement(By.id("TenderFee")).clear();
 					driver.findElement(By.id("TenderFee")).sendKeys("5000");
 					Thread.sleep(200);
 					System.out.println(" Tender Fee as YES ");
-				} else if ( i == 11 || i == 12 || i == 13 || i == 14) {
+				} else if (TenderFee.equals("NO")) {
 					driver.findElement(By.id("TenderFee")).clear();
 					driver.findElement(By.id("TenderFee")).sendKeys("0");
 					Thread.sleep(200);
 					System.out.println(" Tender Fee as No ");
 				}
 
+//Processing Fee
+				
+				if (ProcessingFee.equals("YES")) {
+					driver.findElement(By.id("ProcessingFee")).clear();
+					driver.findElement(By.id("ProcessingFee")).sendKeys("5000");
+					Thread.sleep(200);
+					System.out.println(" Processing Fee as YES ");
+				} else if (ProcessingFee.equals("NO")) {
+					driver.findElement(By.id("ProcessingFee")).clear();
+					driver.findElement(By.id("ProcessingFee")).sendKeys("0");
+					Thread.sleep(200);
+					System.out.println(" Processing Fee as No ");
+				}
+
 //Tender Fee Exemption				
-				if (i == 1 || i == 2 || i == 3 || i == 4 || i == 16 || i == 17) {
+				if (TenderFeewithEX.equals("YES")) {
 					driver.findElement(By.id("optTenderFull")).click();
 					Thread.sleep(200);
 					System.out.println(" Tender Fee Exemption as Yes ");
-				} else if (i == 5 || i == 6 || i == 7 || i == 8 || i == 15 || i == 18 || i == 11
-						|| i == 12 || i == 13 || i == 14) {
+				} if (TenderFeewithEX.equals("NO")) {
 					driver.findElement(By.id("optTenderNone")).click();
 					Thread.sleep(200);
 					System.out.println(" Tender Fee Exemption as No ");
 				}
 
 //EMD Fee
-				if (i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 7 || i == 8 || i == 11 || i == 12
-						|| i == 13 || i == 14) {
+				if (EMDFee.equals("YES")) {
 					driver.findElement(By.id("EMDFiexedAmt")).clear();
 					driver.findElement(By.id("EMDFiexedAmt")).sendKeys("50000");
 					Thread.sleep(200);
 					System.out.println(" EMD Fee as Yes ");
-				} else if (i == 16 || i == 17 || i == 15 || i == 18 ) {
+				} else if (EMDFee.equals("NO")) {
 					driver.findElement(By.id("EMDFiexedAmt")).clear();
 					driver.findElement(By.id("EMDFiexedAmt")).sendKeys("0");
 					Thread.sleep(200);
@@ -483,28 +519,42 @@ public class EBG_Tenderworkflow extends BaseClass {
 				}
 
 //EMD Fee Exemption	
-				if (i == 1 || i == 2 || i == 5 || i == 6 || i == 11 || i == 12) {
+				if (EMDFeewithEX.equals("YES")) {
 					driver.findElement(By.id("optEmdFull")).click();
 					Thread.sleep(200);
 					System.out.println(" EMD Fee Exemption as Yes ");
-				} else if (i == 3 || i == 4 || i == 7 || i == 8 || i == 13 || i == 14 || i == 16 || i == 17 || i == 15
-						|| i == 18 ) {
+				} else if (EMDFeewithEX.equals("NO")) {
 					driver.findElement(By.id("optEmdNone")).click();
 					Thread.sleep(200);
 					System.out.println(" EMD Fee Exemption as No ");
 				}
 
 //e-BG 	
-				if (i == 1 || i == 3 || i == 5 || i == 7 || i == 11 || i == 13 || i == 16 || i == 18) {
-					driver.findElement(By.id("bgYes")).click();Thread.sleep(500);
+				if (eBG.equals("YES")) {
+					driver.findElement(By.xpath("//td[text()='eBG Required']//following-sibling::td//input[1]")).click();
+					Thread.sleep(500);
 					driver.findElement(By.id("minDirectAmount")).clear();
-					driver.findElement(By.id("minDirectAmount")).sendKeys("1000");
+					driver.findElement(By.id("minDirectAmount")).sendKeys("0");
 					Thread.sleep(200);
-					System.out.println(" BG as Yes ");
-				} else if (i == 2 || i == 4 || i == 6 || i == 8 ||  i == 12 || i == 14 || i == 15 || i == 17) {
-					driver.findElement(By.id("bgNo")).click();
+					System.out.println(" E-BG as Yes ");
+				} else if (eBG.equals("NO")) {
+					driver.findElement(By.xpath("//td[text()='eBG Required']//following-sibling::td//input[2]")).click();
 					Thread.sleep(200);
-					System.out.println(" BG as No ");
+					System.out.println(" E-BG as No ");
+				}
+
+//MDP				
+				
+				if (MDP0.equals("eBG = 0")) {
+					driver.findElement(By.id("minDirectAmount")).clear();
+					driver.findElement(By.id("minDirectAmount")).sendKeys("0");
+					Thread.sleep(200);
+					System.out.println(" E-BG as 0 ");
+				} else if (MDP0.equals("eBG> 0")) {
+					Thread.sleep(200);
+					driver.findElement(By.id("minDirectAmount")).clear();
+					driver.findElement(By.id("minDirectAmount")).sendKeys("3000");
+					System.out.println(" E-BG is max ");
 				}
 
 				Thread.sleep(200);
@@ -513,7 +563,10 @@ public class EBG_Tenderworkflow extends BaseClass {
 
 			} catch (NoSuchElementException e) {
 				e.printStackTrace();
-			} finally {
+			} 
+			catch (InvalidElementStateException e) {
+				e.printStackTrace();
+			}finally {
 				System.out.println("Any other issue");
 			}
 
@@ -739,69 +792,136 @@ public class EBG_Tenderworkflow extends BaseClass {
 			
 		try	{
 				System.out.println(" Default Creation Timings");
-				driver.findElement(By.id("publishDate")).sendKeys("15/12/2023");Thread.sleep(300);
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-				driver.findElement(By.id("documentSaleStartDate")).sendKeys("15/12/2023");Thread.sleep(300);
+				driver.findElement(By.id("publishDate")).sendKeys("26/12/2023");Thread.sleep(300);
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-				driver.findElement(By.id("bidSubStartDate")).sendKeys("15/12/2023");Thread.sleep(300);
+				driver.findElement(By.id("documentSaleStartDate")).sendKeys("26/12/2023");Thread.sleep(300);
+				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+				driver.findElement(By.id("bidSubStartDate")).sendKeys("26/12/2023");Thread.sleep(300);
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 				
 				if(i<=5) {
-					driver.findElement(By.id("bidSubCloseDate")).sendKeys("25/12/2023");Thread.sleep(300);
+					driver.findElement(By.id("bidSubCloseDate")).sendKeys("11/01/2024");Thread.sleep(300);
 					driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("26/12/2023");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("11/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 					}
 					else if(i<=10) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("26/12/2023");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("12/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("27/12/2023");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("12/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 					}
 					else if(i<=15) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("27/12/2023");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("13/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("28/12/2023");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("13/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 					}
 					else if(i<=20) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("28/12/2023");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("15/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("29/12/2023");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("15/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 					}
 					else if(i<=25) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("29/12/2023");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("16/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("30/12/2023");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("16/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 					}
 					else if(i<=30) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("30/12/2023");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("17/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("31/12/2023");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("17/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 					}
 					else if(i<=35) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("24/12/2023");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("18/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("25/12/2023");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("18/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+					}
+					else if(i<=40) {
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("10/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("10/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+					}
+					else if(i<=45) {
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("11/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("11/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+					}
+					else if(i<=50) {
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("12/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("12/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+					}
+					else if(i<=55) {
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("12/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("12/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+					}
+					else if(i<=60) {
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("13/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("13/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+					}
+					else if(i<=65) {
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("15/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("15/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+					}
+					else if(i<=70) {
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("16/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("16/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+					}
+					else if(i<=75) {
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("17/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("17/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+					}
+					else if(i<=80) {
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("18/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("18/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+					}
+					else if(i<=85) {
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("10/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("10/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+					}
+					else if(i<=90) {
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("11/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("11/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 					}
 					
-				selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "12");
-				selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "12");
-				selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "13");
-				selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "13");
-				selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "11");
+				selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "18");
+				selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "18");
+				selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "18");
+				selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "17");
+				selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "17");
 
-				selection(driver.findElement(By.id("publishingDateMin")), "byVisibleText", "50");
-				selection(driver.findElement(By.id("documentSaleStartDateMin")), "byVisibleText", "50");
-				selection(driver.findElement(By.id("bidSubmissionStartDateMin")), "byVisibleText", "50");
+				selection(driver.findElement(By.id("publishingDateMin")), "byVisibleText", "35");
+				selection(driver.findElement(By.id("documentSaleStartDateMin")), "byVisibleText", "35");
+				selection(driver.findElement(By.id("bidSubmissionStartDateMin")), "byVisibleText", "35");
 				selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", "20");
 				selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", "20");
 				Thread.sleep(5000);
-				System.out.println(" Tender Created Before: 9 am");
+				System.out.println(" Tender Created for ebg"+i);
 			}
 		catch (NoSuchElementException e) {
 			e.getStackTrace();
@@ -825,7 +945,7 @@ public class EBG_Tenderworkflow extends BaseClass {
 			// Bid openers List
 			try {
 				driver.findElement(By.xpath("//td[text()='deptuser4@nic.in']//following-sibling::td//input")).click();
-				driver.findElement(By.xpath("//td[text()='deptuser3@nic.in']//following-sibling::td//input")).click();
+			//	driver.findElement(By.xpath("//td[text()='deptuser3@nic.in']//following-sibling::td//input")).click();
 				driver.findElement(By.xpath("//td[text()='deptuser2@nic.in']//following-sibling::td//input")).click();
 				driver.findElement(By.xpath("//td[text()='deptuser1@nic.in']//following-sibling::td//input")).click();
 				driver.findElement(By.id("Submit")).click();
@@ -956,9 +1076,11 @@ public class EBG_Tenderworkflow extends BaseClass {
 			
 			try {
 				Thread.sleep(200);
+		//		Tenderid = driver.findElement(By.xpath("//td[text()='Tender ID']//following-sibling::td[1]")).getText();
+		//		reader.setCellData("Test_Cases", "Tender ID", i, Tenderid);
 				driver.findElement(By.id("Submit")).click();
-				
-				try {
+			
+			try {
 					Thread.sleep(200);
 					driver.switchTo().alert().accept();
 					Thread.sleep(200);
@@ -990,13 +1112,13 @@ public class EBG_Tenderworkflow extends BaseClass {
 			try {
 				Thread.sleep(200);
 				driver.switchTo().alert().accept();
-				Thread.sleep(500);
+				Thread.sleep(200);
 			} catch (NoAlertPresentException e) {
 
 				System.out.println("No Alert");
 			}
 			try {
-			if(i==1) {
+			if(i==2) {
 				BasicId = Tenderid.substring(0, Tenderid.length() - 2);
 				System.out.println(BasicId);
 				}
@@ -1013,6 +1135,7 @@ public class EBG_Tenderworkflow extends BaseClass {
 				e1.printStackTrace();
 			}
 			}
+			
 	}
 
 	public static void Robot1() throws AWTException {
