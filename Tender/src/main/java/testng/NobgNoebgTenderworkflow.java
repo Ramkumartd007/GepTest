@@ -43,7 +43,7 @@ import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
-public class EBG_Tenderworkflow_TestCase extends BaseClass {
+public class NobgNoebgTenderworkflow extends BaseClass {
 
 	public static WebDriver driver;
 
@@ -89,7 +89,7 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 		String Tenderid = null;
 		String MDP = null;
 		//String BasicId = null;
-	    String BasicId = "2024_NIC_10226";
+	    String BasicId = "2024_NIT_10236";
 
 		Properties prop = new Properties();
 		FileInputStream input = new FileInputStream("src\\main\\java\\itemwise\\config.properties");
@@ -100,7 +100,7 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 		Xls_Reader reader = new Xls_Reader("D:\\Test_Scenario_Excel\\EBG_TestCase.xls");
 		
 		
-		String sheetName = "Test_Cases";
+		String sheetName = "Offile_nobg_noEBG";
 		String TenderFee;
 		String TenderFeewithEX;
 		String ProcessingFee;
@@ -163,7 +163,7 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 		}
 		Thread.sleep(2000);
 		Robot1();
-		for (int i = 22; i < 23; i++) {
+		for (int i = 2; i < 20; i++) {
 			Thread.sleep(500);
 			
 			TenderFee = reader.getCellData(sheetName,"Tender FEE", i);
@@ -176,7 +176,7 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 			MDP0 = reader.getCellData(sheetName,"MDP", i);
 			EBGmdp = reader.getCellData(sheetName,"E-BG", i);
 			Case = reader.getCellData(sheetName, "Case", i);
-			System.out.println(TenderFee+TenderFeewithEX+ProcessingFee+EMDFee+EMDFeewithEX+eBG+MDP0+EBGmdp+Case);
+			System.out.println(TenderFee+TenderFeewithEX+ProcessingFee+EMDFee+EMDFeewithEX);
 //Tender Fee				
 			try {
 				if (TenderFee.equals("YES")) {
@@ -213,7 +213,7 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 				} else if (EMDFeewithEX.equals("NO")) {
 					EMDexmpt = "EMD Exempt-No";
 				}
-
+/*
 //e-BG 	
 				if (eBG.equals("YES")) {
 					e_BG = "eBG-Yes";
@@ -227,10 +227,10 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 					e_BG = "MDP-No";
 				}
 				
-
+*/
 			//String Title = "Ver.21/ " + date + " /e-BG/" + TF + "/ " + TFexmpt + "/ " + EMD + "/ " + EMDexmpt + "/ " + e_BG + "/ " + "TestScenario_" + i;
 			String Title = reader.getCellData(sheetName, "Case", i);
-				String TRef = "Ver.21/ " + date + " /e-BG" + "/ TestScenario";
+				String TRef = "Ver.21/ " + date + " /NObg/Noebg" + "/ TestScenario";
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.findElement(By.xpath("//a[text() = 'Create Tender / Tender List']")).click();
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -244,7 +244,7 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 			selection(driver.findElement(By.name("noOfPackets")), "ByValue", noOfPackets);
 			selection(driver.findElement(By.name("tenderCategory")), "ByVisibleText", tenderCategory);
 			selection(driver.findElement(By.name("bidOpenerType")), "ByIndex", bidOpenerType);
-			try {
+		/*	try {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				driver.findElement(By.xpath("//input[@id='mclAllowed'][@value = '1']")).click();
 			} catch (NoSuchElementException e) {
@@ -259,7 +259,7 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 				System.out.println("Two Stage Bidding is Disabled");
 				;
 			}
-			/*
+			
 			 * try { driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 			 * driver.findElement(By.id("multiCurYes")).click(); } catch
 			 * (NoSuchElementException e) {
@@ -370,6 +370,7 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 				driver.findElement(By.id("invitingOfficer")).sendKeys("Officer");
 				driver.findElement(By.id("invitingOfficerAddress")).sendKeys("Address");
 				driver.findElement(By.id("expireDays")).sendKeys("45");
+				
 				driver.findElement(By.id("allowMediaPublishDateNo")).click();
 				driver.findElement(By.id("allowTenderBulletinDateNo")).click();
 				/*
@@ -458,8 +459,8 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 				Thread.sleep(500);
 				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 				
-				driver.findElement(By.id("chkOffLine")).click();
-				driver.findElement(By.id("chkOnLine")).click();
+			//	driver.findElement(By.id("chkOffLine")).click();
+				//driver.findElement(By.id("chkOnLine")).click();
 				Thread.sleep(200);
 			/*	if(i==9||(i>=43&&i<=66))
 				{
@@ -528,7 +529,7 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 					Thread.sleep(200);
 					System.out.println(" EMD Fee Exemption as No ");
 				}
-
+/*
 //e-BG 	
 				if (eBG.equals("YES")) {
 					driver.findElement(By.xpath("//td[text()='eBG Required']//following-sibling::td//input[1]")).click();
@@ -556,7 +557,7 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 					driver.findElement(By.id("minDirectAmount")).sendKeys("3000");
 					System.out.println(" E-BG is max ");
 				}
-
+*/
 				Thread.sleep(200);
 				driver.findElement(By.id("Next")).click();
 				System.out.println("Successful - Fee Details");
@@ -793,11 +794,11 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 			try	{
 				System.out.println(" Default Creation Timings");
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-				driver.findElement(By.id("publishDate")).sendKeys("04/01/2024");Thread.sleep(300);
+				driver.findElement(By.id("publishDate")).sendKeys("05/01/2024");Thread.sleep(300);
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-				driver.findElement(By.id("documentSaleStartDate")).sendKeys("04/01/2024");Thread.sleep(300);
+				driver.findElement(By.id("documentSaleStartDate")).sendKeys("05/01/2024");Thread.sleep(300);
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-				driver.findElement(By.id("bidSubStartDate")).sendKeys("04/01/2024");Thread.sleep(300);
+				driver.findElement(By.id("bidSubStartDate")).sendKeys("05/01/2024");Thread.sleep(300);
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 				
 				if(i<=5) {
@@ -819,7 +820,7 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 					}
 					else if(i<=20) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("18/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("13/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 						driver.findElement(By.id("bidOpenDate")).sendKeys("18/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
@@ -909,18 +910,18 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 					}
 					
-				selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "17");
-				selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "17");
-				selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "18");
-				selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "11");
-				selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "11");
+				selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "12");
+				selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "12");
+				selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "13");
+				selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "09");
+				selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "09");
 
 				selection(driver.findElement(By.id("publishingDateMin")), "byVisibleText", "10");
 				selection(driver.findElement(By.id("documentSaleStartDateMin")), "byVisibleText", "10");
-				selection(driver.findElement(By.id("bidSubmissionStartDateMin")), "byVisibleText", "35");
-				selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", "20");
+				selection(driver.findElement(By.id("bidSubmissionStartDateMin")), "byVisibleText", "40");
+				selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", "40");
 				selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", "40");
-				Thread.sleep(5000);
+				Thread.sleep(1000);
 				System.out.println(" Tender Created for ebg"+i);
 			}
 		catch (NoSuchElementException e) {
@@ -944,10 +945,10 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 
 			// Bid openers List
 			try {
-				driver.findElement(By.xpath("//td[text()='deptuser4@nic.in']//following-sibling::td//input")).click();
+				driver.findElement(By.xpath("//td[text()='deptuser7@nic.in']//following-sibling::td//input")).click();
 			//	driver.findElement(By.xpath("//td[text()='deptuser3@nic.in']//following-sibling::td//input")).click();
-				driver.findElement(By.xpath("//td[text()='deptuser2@nic.in']//following-sibling::td//input")).click();
-				driver.findElement(By.xpath("//td[text()='deptuser1@nic.in']//following-sibling::td//input")).click();
+				driver.findElement(By.xpath("//td[text()='deptuser4@nic.in']//following-sibling::td//input")).click();
+				driver.findElement(By.xpath("//td[text()='deptuser8@nic.in']//following-sibling::td//input")).click();
 				driver.findElement(By.id("Submit")).click();
 				System.out.println("Successful - Bid openers List");
 			} catch (NoSuchElementException e) {
@@ -1007,7 +1008,7 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 				
 			}
 			Thread.sleep(1000);
-
+			/*
 			try {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				if (driver.findElement(By.xpath("//td/span[text()='Resource Master (Fleet / Equipment / Manpower)']"))
@@ -1037,7 +1038,7 @@ public class EBG_Tenderworkflow_TestCase extends BaseClass {
 				System.out.println("Successful - OID Stage Completed");
 			}
 			Thread.sleep(1500);
-
+*/
 			// GeMARPTS ID
 			try {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
