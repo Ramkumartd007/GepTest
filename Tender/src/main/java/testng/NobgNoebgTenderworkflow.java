@@ -89,7 +89,7 @@ public class NobgNoebgTenderworkflow extends BaseClass {
 		String Tenderid = null;
 		String MDP = null;
 		//String BasicId = null;
-	    String BasicId = "2024_NIT_10236";
+	    String BasicId = "2024_NIT_10255";
 
 		Properties prop = new Properties();
 		FileInputStream input = new FileInputStream("src\\main\\java\\itemwise\\config.properties");
@@ -112,7 +112,7 @@ public class NobgNoebgTenderworkflow extends BaseClass {
 		String Case;
 		
 		driver.get("https://demoetenders.tn.nic.in/nicgep/app");
-		// driver.get("https://demoeproc.nic.in/nicgep/app");
+		//driver.get("https://demoeproc.nic.in/nicgep/app");
 		driver.manage().window().maximize();
 		Thread.sleep(3000);
 		driver.findElement(By.id("login")).click();
@@ -163,7 +163,7 @@ public class NobgNoebgTenderworkflow extends BaseClass {
 		}
 		Thread.sleep(2000);
 		Robot1();
-		for (int i = 2; i < 20; i++) {
+		for (int i = 4; i < 20; i++) {
 			Thread.sleep(500);
 			
 			TenderFee = reader.getCellData(sheetName,"Tender FEE", i);
@@ -794,42 +794,100 @@ public class NobgNoebgTenderworkflow extends BaseClass {
 			try	{
 				System.out.println(" Default Creation Timings");
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-				driver.findElement(By.id("publishDate")).sendKeys("05/01/2024");Thread.sleep(300);
+				driver.findElement(By.id("publishDate")).sendKeys("08/01/2024");Thread.sleep(300);
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-				driver.findElement(By.id("documentSaleStartDate")).sendKeys("05/01/2024");Thread.sleep(300);
+				driver.findElement(By.id("documentSaleStartDate")).sendKeys("08/01/2024");Thread.sleep(300);
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-				driver.findElement(By.id("bidSubStartDate")).sendKeys("05/01/2024");Thread.sleep(300);
+				driver.findElement(By.id("bidSubStartDate")).sendKeys("08/01/2024");Thread.sleep(300);
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 				
 				if(i<=5) {
-					driver.findElement(By.id("bidSubCloseDate")).sendKeys("10/01/2024");Thread.sleep(300);
+					driver.findElement(By.id("bidSubCloseDate")).sendKeys("15/01/2024");Thread.sleep(300);
 					driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("10/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("15/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "12");
+						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "12");
+						selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "13");
+						selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "16");
+						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "16");
+
+						selection(driver.findElement(By.id("publishingDateMin")), "byVisibleText", "10");
+						selection(driver.findElement(By.id("documentSaleStartDateMin")), "byVisibleText", "10");
+						selection(driver.findElement(By.id("bidSubmissionStartDateMin")), "byVisibleText", "40");
+						selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", "20");
+						selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", "20");
 					}
 					else if(i<=10) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("11/01/2024");Thread.sleep(300);
-						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("11/01/2024");Thread.sleep(300);
-						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-					}
-					else if(i<=15) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("12/01/2024");Thread.sleep(300);
-						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("12/01/2024");Thread.sleep(300);
-						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-					}
-					else if(i<=20) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("13/01/2024");Thread.sleep(300);
-						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("18/01/2024");Thread.sleep(300);
-						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-					}
-					else if(i<=25) {
 						driver.findElement(By.id("bidSubCloseDate")).sendKeys("15/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 						driver.findElement(By.id("bidOpenDate")).sendKeys("15/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "12");
+						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "12");
+						selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "13");
+						selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "17");
+						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "17");
+
+						selection(driver.findElement(By.id("publishingDateMin")), "byVisibleText", "10");
+						selection(driver.findElement(By.id("documentSaleStartDateMin")), "byVisibleText", "10");
+						selection(driver.findElement(By.id("bidSubmissionStartDateMin")), "byVisibleText", "40");
+						selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", "40");
+						selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", "40");
+					}
+					else if(i<=15) {
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("15/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("15/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						
+						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "12");
+						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "12");
+						selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "13");
+						selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "18");
+						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "18");
+
+						selection(driver.findElement(By.id("publishingDateMin")), "byVisibleText", "10");
+						selection(driver.findElement(By.id("documentSaleStartDateMin")), "byVisibleText", "10");
+						selection(driver.findElement(By.id("bidSubmissionStartDateMin")), "byVisibleText", "40");
+						selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", "40");
+						selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", "40");
+					}
+					else if(i<=20) {
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("16/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("16/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						
+						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "12");
+						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "12");
+						selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "13");
+						selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "18");
+						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "18");
+
+						selection(driver.findElement(By.id("publishingDateMin")), "byVisibleText", "10");
+						selection(driver.findElement(By.id("documentSaleStartDateMin")), "byVisibleText", "10");
+						selection(driver.findElement(By.id("bidSubmissionStartDateMin")), "byVisibleText", "40");
+						selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", "40");
+						selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", "40");
+					}
+					else if(i<=25) {
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("18/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("18/01/2024");Thread.sleep(300);
+						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						
+						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "12");
+						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "12");
+						selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "13");
+						selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "18");
+						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "18");
+
+						selection(driver.findElement(By.id("publishingDateMin")), "byVisibleText", "10");
+						selection(driver.findElement(By.id("documentSaleStartDateMin")), "byVisibleText", "10");
+						selection(driver.findElement(By.id("bidSubmissionStartDateMin")), "byVisibleText", "40");
+						selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", "40");
+						selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", "40");
 					}
 					else if(i<=30) {
 						driver.findElement(By.id("bidSubCloseDate")).sendKeys("16/01/2024");Thread.sleep(300);
@@ -909,7 +967,7 @@ public class NobgNoebgTenderworkflow extends BaseClass {
 						driver.findElement(By.id("bidOpenDate")).sendKeys("11/01/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 					}
-					
+					/*
 				selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "12");
 				selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "12");
 				selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "13");
@@ -920,7 +978,7 @@ public class NobgNoebgTenderworkflow extends BaseClass {
 				selection(driver.findElement(By.id("documentSaleStartDateMin")), "byVisibleText", "10");
 				selection(driver.findElement(By.id("bidSubmissionStartDateMin")), "byVisibleText", "40");
 				selection(driver.findElement(By.id("bidSubmissionClosingDateMin")), "byVisibleText", "40");
-				selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", "40");
+				selection(driver.findElement(By.id("bidOpeningDateMin")), "byVisibleText", "40");*/
 				Thread.sleep(1000);
 				System.out.println(" Tender Created for ebg"+i);
 			}

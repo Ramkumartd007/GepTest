@@ -9,12 +9,14 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
@@ -40,6 +42,7 @@ public class BidSubmission extends BaseClass {
 
 	public static WebDriver driver;
 	private static String Work_BOQ;
+	private static String work;
 	
 	public static void main(String[] args) throws InterruptedException, AWTException, IOException, TesseractException, ParseException {
 
@@ -52,7 +55,12 @@ public class BidSubmission extends BaseClass {
 		Thread.sleep(2000);
 		driver.findElement(By.id("login")).click(); 
 		Thread.sleep(2000);
-		String Tenderid = "2023_NICT_9936_1";
+		//String Tenderid = "2023_NICT_9936_1";
+		
+		Xls_Reader readerbs = new Xls_Reader("D:\\Test_Scenario_Excel\\EBG_TestCase.xls");
+		String sheetName1 = "Offile_nobg_noEBG";		
+		String Tenderid;
+		
 		try {  
 			while(driver.findElement(By.id("UserName")).isDisplayed())
 			{
@@ -61,8 +69,8 @@ public class BidSubmission extends BaseClass {
 					Thread.sleep(500); 
 					driver.findElement(By.id("UserName")).clear();
 					driver.findElement(By.id("Password")).clear();
-					driver.findElement(By.id("UserName")).sendKeys("bidder6@nic.in");
-					driver.findElement(By.id("Password")).sendKeys("Admin123$");
+					driver.findElement(By.id("UserName")).sendKeys("bidders@nic.in");
+					driver.findElement(By.id("Password")).sendKeys("Admin123$$$");
 					WebElement capt = driver.findElement(By.xpath("//img[@id='captchaImage']"));
 					File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 					BufferedImage fullImg = ImageIO.read(screenshot);	
@@ -102,9 +110,15 @@ public class BidSubmission extends BaseClass {
 		System.out.println("Sucessful - Second Login");
 		Thread.sleep(500);
 		
+		for (int j = 4; j < 20; j++) {
+			Thread.sleep(500);
+			
+			Tenderid = readerbs.getCellData(sheetName1,"Tender id's Created on 08-01-2023", j);
+			System.out.println(Tenderid);
 		try {
 			Thread.sleep(2000);
-			driver.findElement(By.id("PageLink_3")).click(); Thread.sleep(3000);
+			driver.findElement(By.xpath("//a[text() = 'Search Active Tenders']")).click(); Thread.sleep(2000);
+			driver.findElement(By.id("tenderId")).clear();
 			driver.findElement(By.id("tenderId")).sendKeys(Tenderid);
 			driver.findElement(By.id("submit")).click();Thread.sleep(2000);
 			driver.findElement(By.id("Checkbox")).click();
@@ -116,21 +130,23 @@ public class BidSubmission extends BaseClass {
 		}
 
 		try {		
-
-			driver.findElement(By.id("PageLink_0_8")).click();Thread.sleep(3000);
+			
+			driver.findElement(By.xpath("//a[text() = 'My Tenders']")).click(); Thread.sleep(2000);
 			driver.findElement(By.id("TenderID")).sendKeys(Tenderid);
 			driver.findElement(By.id("search")).click(); Thread.sleep(2000);	
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-			driver.findElement(By.id("DirectLink_0")).click();Thread.sleep(2000);/*
+			driver.findElement(By.id("DirectLink_0")).click();Thread.sleep(2000);
 			driver.findElement(By.xpath("//img[@src='images/zipicon.png']")).click();
 			Thread.sleep(1000);
-			System.out.println("Tender document has been downloaded");*/
+			System.out.println("Tender document has been downloaded");
+			Thread.sleep(1500);
 		}catch (NoSuchElementException e) {
 			System.out.println("error");
 		}
 
 		WebElement BOQ = driver.findElement(By.xpath("//table[@id='tableView4']/tbody/tr[2]/td[3][text()[contains(.,'BOQ')]]"));
 		Work_BOQ = BOQ.getText().replace(".xls","");	
+		work = BOQ.getText().replace(".xls","").replace("BOQ","work");
 		System.out.println(Work_BOQ);Thread.sleep(200);
 		driver.findElement(By.xpath("//input[@class = 'customButton']")).click();
 		
@@ -178,7 +194,7 @@ public class BidSubmission extends BaseClass {
 			if(driver.findElement(By.xpath("//span[text()='BG Fee Payment']")).isDisplayed()) {
 				Thread.sleep(500);driver.findElement(By.id("cmdNext")).click();Thread.sleep(500);System.out.println("BG Fee Payment is no");}} catch (NoSuchElementException e){System.out.println("No Emd Exemption");}
 			Thread.sleep(500);
-			
+			/*
 			try {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);		
 					if(driver.findElement(By.id("oid")).isDisplayed())
@@ -190,7 +206,7 @@ public class BidSubmission extends BaseClass {
 				} catch (NoSuchElementException e1) {
 				System.out.println("There is no oid");
 				}
-	
+	*/
 			
 			
 	//Offline Payment		
@@ -269,7 +285,7 @@ public class BidSubmission extends BaseClass {
 			
 			
 	//Bid Process List
-				
+				/*
 			System.out.println("Bid Process List");
 			try {
 				Thread.sleep(500);
@@ -536,7 +552,7 @@ else if (AVP||AVP1)
 			{
 				System.out.println("fail in table");
 			}
-			
+			*/
 		
 			try {
 				driver.findElement(By.id("encryptUpload")).click();  Thread.sleep(1000);  
@@ -551,7 +567,7 @@ else if (AVP||AVP1)
 				if(driver.findElement(By.id("bidEngender")).isDisplayed()) {
 					TenchnicalDocumentUpload();
 				}
-				Thread.sleep(6000);
+				Thread.sleep(2000);
 				driver.findElement(By.id("DirectLink_2")).click();Thread.sleep(4000);
 				if(driver.findElement(By.id("bidEngender")).isDisplayed()) {
 					FinancialDocumentUpload();
@@ -571,7 +587,7 @@ else if (AVP||AVP1)
 			Thread.sleep(3000);
 			driver.findElement(By.id("next")).click();Thread.sleep(4000);
 			driver.findElement(By.id("freeze")).click();Thread.sleep(4000);
-
+		}
 		}
 
 	public static void Avail_PrefentialBidder_Document() throws AWTException {
@@ -632,19 +648,19 @@ else if (AVP||AVP1)
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 		robot.delay(3000);
 		
-		setClipboardData("C:\\Users\\admin\\Documents\\TenderDocument.pdf");	
+		setClipboardData("C:\\Users\\91991\\Documents\\TenderDocument.pdf");	
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
-		robot.delay(10000);	
+		robot.delay(1000);	
 		robot.keyRelease(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
-		robot.delay(12000);
+		robot.delay(1200);
 		robot.mouseMove(1053, 686);
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-		robot.delay(10000);
+		robot.delay(1000);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 			}
@@ -652,21 +668,21 @@ else if (AVP||AVP1)
 		
 		Robot robot = new Robot();
 		robot.mouseMove(1071, 399);
-		robot.delay(3000);
+		robot.delay(1000);
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-		robot.delay(3000);
+		robot.delay(1000);
 		robot.mouseMove(674, 464);
-		robot.delay(3000);
+		robot.delay(1000);
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-		robot.delay(3000);
-		String boq = "work_76401";
-		setClipboardData("C:\\Users\\91991\\Documents\\000boq\\"+Work_BOQ+"\\"+Work_BOQ+".xls");	
+		robot.delay(1000);
+		//String boq = "work_76401";
+		setClipboardData("C:\\Users\\91991\\Downloads\\"+work+"\\"+Work_BOQ+".xls");	
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
-		robot.delay(10000);	
+		robot.delay(7000);	
 		robot.keyRelease(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
@@ -678,11 +694,11 @@ else if (AVP||AVP1)
 		robot.delay(3000);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);			
-		robot.delay(12000);
+		robot.delay(1000);
 		robot.mouseMove(1053, 686);
 		robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
 		robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-		robot.delay(10000);
+		robot.delay(1000);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 			}
