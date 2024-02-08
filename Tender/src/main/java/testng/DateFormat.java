@@ -126,12 +126,15 @@ public static void main(String[] args) throws ParseException {
    	
          }
  	 */
+	String HELLO = "Hello World";
+	int hel = HELLO.length();
+	System.out.println(hel);
 	String EMDexmpt= null;
 	String EMD= null;
 	String TFexmpt = null;
 	String TF= null;
 	String e_BG= null;
-	for (int i = 1; i < 20; i++) {
+	for (int i = 1; i < 5; i++) {
 		 // if (i % 11 == 2) continue;
 		  //do stuff
 		

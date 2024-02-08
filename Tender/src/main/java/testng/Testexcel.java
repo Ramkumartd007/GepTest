@@ -89,7 +89,7 @@ public class Testexcel extends BaseClass {
 		//String BasicId = null;
 		String BasicId = "2023_NIC_10085";
 
-		Xls_Reader reader = new Xls_Reader("D:\\Test_Scenario_Excel\\EBG_TestCase.xls");
+		Xls_Reader reader = new Xls_Reader("D:\\Test_Scenario_Excel\\eBG_Scenario.xls");
 		
 		
 		String sheetName = "Test_Cases";
@@ -106,7 +106,7 @@ public class Testexcel extends BaseClass {
 		String EBGmdp;
 		String Case;*/
 		
-		for (int i = 2; i < 26; i++) {
+		for (int i = 2; i < 91; i++) {
 			
 			
 			/*TenderFee = reader.getCellData(sheetName,"Tender Fee", i);

@@ -44,7 +44,7 @@ import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
-public class EBG_Tenderworkflow_excel extends BaseClass {
+public class OnlineFee_Tenderworkflow_excel extends BaseClass {
 
 	public static WebDriver driver;
 
@@ -77,7 +77,7 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 
 		String tenderType = "Open Tender";
 		String formContract = "Supply";
-		String noOfPackets = "2";
+		String noOfPackets = "1";
 		String tenderCategory = "Goods";
 		String bidOpenerType = "2";
 
@@ -86,12 +86,12 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 		String EMDexmpt = null;
 		String TF = null;
 		String PF = null;
-		String BG_S = null;
-		String e_BG = null;
+	//	String BG_S = null;
+	//	String e_BG = null;
 		String Tenderid = null;
 		String MDP = null;
-		//String BasicId = null;
-		String BasicId = "2024_NIC_10344";
+		String BasicId = null;
+		//String BasicId = "2024_NICT_10010";
 
 		Properties prop = new Properties();
 		FileInputStream input = new FileInputStream("src\\main\\java\\itemwise\\config.properties");
@@ -99,23 +99,23 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 		System.setProperty("webdriver.gecko.driver",
 				"C:\\Users\\91991\\eclipse-workspace\\com\\Driver\\geckodriver.exe");
 		WebDriver driver = new FirefoxDriver();
-		Xls_Reader reader = new Xls_Reader("D:\\Test_Scenario_Excel\\eBG_Scenario.xls");
+		Xls_Reader reader = new Xls_Reader("D:\\Test_Scenario_Excel\\EBG_TestCase.xls");
 		
 		
-		String sheetName = "Test_Cases";
+		String sheetName = "Offile_nobg_noEBG";
 		String TenderFee;
 		String TenderFeewithEX;
 		String ProcessingFee;
 		String EMDFee;
 		String EMDFeewithEX;
-		String BG;
-		String eBG;
+		//String BG;
+		//String eBG;
 		String MDP0;
 		String BGmdp;
 		String EBGmdp;
 		String Case;
 		
-		driver.get("https://demoetenders.tn.nic.in/nicgep/app");
+		driver.get("https://demoetenders.tn.nic.in/pretenderv2/app");
 		// driver.get("https://demoeproc.nic.in/nicgep/app");
 		driver.manage().window().maximize();
 		Thread.sleep(3000);
@@ -167,7 +167,7 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 		}
 		Thread.sleep(2000);
 		Robot1();
-		for (int i = 57; i < 91; i++) {
+		for (int i = 2; i < 20; i++) {
 			Thread.sleep(500);
 			
 			TenderFee = reader.getCellData(sheetName,"Tender FEE", i);
@@ -175,13 +175,13 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 			ProcessingFee = reader.getCellData(sheetName,"Processing FEE", i);
 			EMDFee = reader.getCellData(sheetName,"EMD FEE", i);
 			EMDFeewithEX = reader.getCellData(sheetName,"EMD FEE Exempt", i);
-			BG = reader.getCellData(sheetName,"BG", i);
-			eBG = reader.getCellData(sheetName,"E-BG", i);
-			MDP0 = reader.getCellData(sheetName,"MDP", i);
-			BGmdp = reader.getCellData(sheetName,"BG", i);
-			EBGmdp = reader.getCellData(sheetName,"E-BG", i);
+		//	BG = reader.getCellData(sheetName,"BG", i);
+		//	eBG = reader.getCellData(sheetName,"E-BG", i);
+		//	MDP0 = reader.getCellData(sheetName,"MDP", i);
+		//	BGmdp = reader.getCellData(sheetName,"BG", i);
+		//	EBGmdp = reader.getCellData(sheetName,"E-BG", i);
 			Case = reader.getCellData(sheetName, "Case", i);
-			System.out.println(TenderFee+TenderFeewithEX+ProcessingFee+EMDFee+EMDFeewithEX+BG+eBG+MDP0+BGmdp+Case);
+			System.out.println(TenderFee+TenderFeewithEX+ProcessingFee+EMDFee+EMDFeewithEX/*+BG+eBG+MDP0+BGmdp*/+" / "+Case);
 //Tender Fee				
 			try {
 				if (TenderFee.equals("YES")) {
@@ -218,6 +218,7 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 				} else if (EMDFeewithEX.equals("NO")) {
 					EMDexmpt = "EMD Exempt-No";
 				}
+				/*
 //BG 	
 				if (BG.equals("YES")) {
 					BG_S = "BG-Yes";
@@ -227,6 +228,7 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 			
 
 //e-BG 	
+				
 				if (eBG.equals("YES")) {
 					e_BG = "eBG-Yes";
 				} else if (eBG.equals("NO")) {
@@ -238,17 +240,17 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 				} else if (MDP0.equals("eBG> 0")) {
 					e_BG = "MDP-No";
 				}
-				
+				*/
 
 			//String Title = "Ver.21/ " + date + " /e-BG/" + TF + "/ " + TFexmpt + "/ " + EMD + "/ " + EMDexmpt + "/ " + e_BG + "/ " + "TestScenario_" + i;
 			String Title = reader.getCellData(sheetName, "Case", i);
-				String TRef = "Ver.21/ " + date + " /e-BG/" + "/ TestScenario";
+				String TRef = "Ver.20/ " + date + " /e-BG/" + "/ TestScenario";
 			driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 			driver.findElement(By.xpath("//a[text() = 'Create Tender / Tender List']")).click();
-			Thread.sleep(500);
-			if(i==50)
+			Thread.sleep(1000);
+			if(i==2)
 			{
-				Thread.sleep(500);
+				Thread.sleep(1500);
 			driver.findElement(By.id("bd")).click();
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			driver.findElement(By.name("tenderRefNo")).sendKeys(TRef);
@@ -263,7 +265,7 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 			} catch (NoSuchElementException e) {
 				System.out.println("Automation is Disabled");
 			}
-
+/*
 			try {
 				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 				driver.findElement(By.xpath("//input[@id='twoStageAllowed'][@value = '1']")).click();
@@ -272,7 +274,7 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 				System.out.println("Two Stage Bidding is Disabled");
 				;
 			}
-			/*
+			
 			 * try { driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 			 * driver.findElement(By.id("multiCurYes")).click(); } catch
 			 * (NoSuchElementException e) {
@@ -300,6 +302,7 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 				Thread.sleep(500);
 				driver.findElement(By.id("Save")).click();
 				Thread.sleep(500);
+				/*
 				driver.findElement(By.id("DirectLink_2")).click();
 				Thread.sleep(500);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
@@ -307,13 +310,14 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 				driver.findElement(By.id("one_0")).click();
 				Thread.sleep(500);
 				driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+				*/
 				driver.findElement(By.id("docDesc")).sendKeys("Finance");
 				selection(driver.findElement(By.id("docType")), "ByVisibleText", ".xls");
 				Thread.sleep(500);
 				driver.findElement(By.id("Save")).click();
 				Thread.sleep(500);
 				driver.findElement(By.id("DirectLink_2")).click();
-				Thread.sleep(500);
+				Thread.sleep(1500);
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 				driver.findElement(By.id("Next")).click();
 				Thread.sleep(300);
@@ -327,7 +331,7 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 
 			// NIT Document
 			try {
-				Thread.sleep(500);
+				Thread.sleep(1500);
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				if (driver.findElement(By.id("DirectLink_0")).isDisplayed()) {
 					Thread.sleep(1000);
@@ -474,13 +478,14 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 			// Fee Details
 			
 			try {
-				Thread.sleep(500);
+				Thread.sleep(1500);
 				//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 				
-			/*	driver.findElement(By.id("chkOffLine")).click();
+				driver.findElement(By.id("chkOffLine")).click();
+				Thread.sleep(1500);
 				driver.findElement(By.id("chkOnLine")).click();
 				Thread.sleep(200);
-				if(i==9||(i>=43&&i<=66))
+			/*	if(i==9||(i>=43&&i<=66))
 				{
 				//	driver.findElement(By.id("chkOnLine")).click();
 					driver.findElement(By.id("NotApplicable")).click();	
@@ -489,7 +494,7 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 //Tender Fee
 				if (TenderFee.equals("YES")) {
 					driver.findElement(By.id("TenderFee")).clear();
-					driver.findElement(By.id("TenderFee")).sendKeys("5000");
+					driver.findElement(By.id("TenderFee")).sendKeys("50");
 					Thread.sleep(200);
 					System.out.println(" Tender Fee as YES ");
 				} else if (TenderFee.equals("NO")) {
@@ -503,7 +508,7 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 				
 				if (ProcessingFee.equals("YES")) {
 					driver.findElement(By.id("ProcessingFee")).clear();
-					driver.findElement(By.id("ProcessingFee")).sendKeys("5000");
+					driver.findElement(By.id("ProcessingFee")).sendKeys("100");
 					Thread.sleep(200);
 					System.out.println(" Processing Fee as YES ");
 				} else if (ProcessingFee.equals("NO")) {
@@ -527,7 +532,7 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 //EMD Fee
 				if (EMDFee.equals("YES")) {
 					driver.findElement(By.id("EMDFiexedAmt")).clear();
-					driver.findElement(By.id("EMDFiexedAmt")).sendKeys("50000");
+					driver.findElement(By.id("EMDFiexedAmt")).sendKeys("500");
 					Thread.sleep(200);
 					System.out.println(" EMD Fee as Yes ");
 				} else if (EMDFee.equals("NO")) {
@@ -547,7 +552,7 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 					Thread.sleep(200);
 					System.out.println(" EMD Fee Exemption as No ");
 				}
-
+/*
 //e-BG 	
 				if (eBG.equals("YES")) {
 					driver.findElement(By.xpath("//td[text()='eBG Required']//following-sibling::td//input[1]")).click();
@@ -588,7 +593,7 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 					driver.findElement(By.id("minDirectAmount")).sendKeys("3000");
 					System.out.println(" E-BG as No ");
 				}
-
+*/
 				Thread.sleep(200);
 				driver.findElement(By.id("Next")).click();
 				System.out.println("Successful - Fee Details");
@@ -826,36 +831,60 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 				System.out.println(" Default Creation Timings");
 				Thread.sleep(500);
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-				driver.findElement(By.id("publishDate")).sendKeys("27/01/2024");Thread.sleep(300);
+				driver.findElement(By.id("publishDate")).sendKeys("09/02/2024");Thread.sleep(300);
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-				driver.findElement(By.id("documentSaleStartDate")).sendKeys("27/01/2024");Thread.sleep(300);
+				driver.findElement(By.id("documentSaleStartDate")).sendKeys("09/02/2024");Thread.sleep(300);
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-				driver.findElement(By.id("bidSubStartDate")).sendKeys("27/01/2024");Thread.sleep(300);
+				driver.findElement(By.id("bidSubStartDate")).sendKeys("09/02/2024");Thread.sleep(300);
 				driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 				
 				if(i<=5) {
-					driver.findElement(By.id("bidSubCloseDate")).sendKeys("10/01/2024");Thread.sleep(300);
+					driver.findElement(By.id("bidSubCloseDate")).sendKeys("12/02/2024");Thread.sleep(300);
 					driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("10/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("12/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						
+						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "09");
+						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "09");
+						selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "09");
+						selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "17");
+						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "17");
 					}
 					else if(i<=10) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("11/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("12/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("11/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("12/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						
+						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "09");
+						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "09");
+						selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "09");
+						selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "18");
+						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "18");
 					}
 					else if(i<=15) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("12/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("12/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("12/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("12/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						
+						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "09");
+						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "09");
+						selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "09");
+						selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "14");
+						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "14");
 					}
 					else if(i<=20) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("14/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("12/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("14/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("12/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+						
+						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "09");
+						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "09");
+						selection(driver.findElement(By.id("bidSubmissionStartDateHour")), "byVisibleText", "09");
+						selection(driver.findElement(By.id("bidSubmissionClosingDateHour")), "byVisibleText", "15");
+						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "15");
 					}
 					else if(i<=25) {
 						driver.findElement(By.id("bidSubCloseDate")).sendKeys("15/01/2024");Thread.sleep(300);
@@ -887,9 +916,9 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "15");
 					}
 					else if(i<=45) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "15");
 						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "15");
@@ -898,9 +927,9 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "16");
 					}
 					else if(i<=50) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "15");
 						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "15");
@@ -909,9 +938,9 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "17");
 					}
 					else if(i<=55) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "15");
 						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "15");
@@ -920,9 +949,9 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "18");
 					}
 					else if(i<=60) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "09");
 						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "09");
@@ -931,9 +960,9 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "10");
 					}
 					else if(i<=65) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "09");
 						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "09");
@@ -942,9 +971,9 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "11");
 					}
 					else if(i<=70) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "09");
 						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "09");
@@ -953,9 +982,9 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "12");
 					}
 					else if(i<=75) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "09");
 						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "09");
@@ -964,9 +993,9 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "13");
 					}
 					else if(i<=80) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "09");
 						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "09");
@@ -975,9 +1004,9 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "14");
 					}
 					else if(i<=85) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "09");
 						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "09");
@@ -986,9 +1015,9 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 						selection(driver.findElement(By.id("bidOpeningDateHour")), "byVisibleText", "15");
 					}
 					else if(i<=91) {
-						driver.findElement(By.id("bidSubCloseDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidSubCloseDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
-						driver.findElement(By.id("bidOpenDate")).sendKeys("27/01/2024");Thread.sleep(300);
+						driver.findElement(By.id("bidOpenDate")).sendKeys("09/02/2024");Thread.sleep(300);
 						driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
 						selection(driver.findElement(By.id("publishingDateHour")), "byVisibleText", "09");
 						selection(driver.findElement(By.id("documentSaleStartDateHour")), "byVisibleText", "09");
@@ -1034,8 +1063,8 @@ public class EBG_Tenderworkflow_excel extends BaseClass {
 			try {
 				driver.findElement(By.xpath("//td[text()='deptuser4@nic.in']//following-sibling::td//input")).click();
 			//	driver.findElement(By.xpath("//td[text()='deptuser3@nic.in']//following-sibling::td//input")).click();
-				driver.findElement(By.xpath("//td[text()='deptuser2@nic.in']//following-sibling::td//input")).click();
-				driver.findElement(By.xpath("//td[text()='deptuser1@nic.in']//following-sibling::td//input")).click();
+				driver.findElement(By.xpath("//td[text()='deptuser7@nic.in']//following-sibling::td//input")).click();
+				driver.findElement(By.xpath("//td[text()='deptusertdr@nic.in']//following-sibling::td//input")).click();
 				driver.findElement(By.id("Submit")).click();
 				System.out.println("Successful - Bid openers List");
 			} catch (NoSuchElementException e) {

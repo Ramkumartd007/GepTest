@@ -63,7 +63,8 @@ public class TC_GTEPreferrentialBidders extends BaseClass {
 	   String timer60 = String.valueOf(timemr-60);
 	   String timer560 = String.valueOf(timemr5-60);
 	  	 
-	    String Title = "Ver.20"+"/"+"NPB"+"/"+"eAgre"+"/"+"LOA"+"/"+"AOC";
+	   // String Title = "Ver.21"+"/"+"NPB"+"/"+"eAgre"+"/"+"LOA"+"/"+"AOC";
+	    String Title = "Ver.21"+"/"+date+"/"+"TenderCumAuction"+"/"+"LOA"+"/"+"AOC";
 	  	String tenderType = "Open Tender";
 		String formContract = "Supply";
 		String noOfPackets = "2";
