@@ -114,6 +114,16 @@
 			<artifactId>api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>Cucumber</groupId>
+			<artifactId>Sept</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.atproapi</groupId>
+			<artifactId>atproapi</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
