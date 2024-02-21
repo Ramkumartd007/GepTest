@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -70,6 +71,25 @@ public class BaseClass {
 		
 	}
 
+	public static void Captcha() throws IOException, TesseractException {
+		try {
+	WebElement capt = driver.findElement(By.xpath("//img[@id='captchaImage']"));
+	String Csrc = capt.getAttribute("src");
+	String base64Image = Csrc.split(",")[1];
+	byte[] image = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
+	BufferedImage img = ImageIO.read(new ByteArrayInputStream(image));
+	File outputfile = new File("C:\\Users\\91991\\eclipse-workspace\\Tender\\Screenshot\\Captcha1.png");
+	ImageIO.write(img, "png", outputfile);
+	ITesseract image1 = new Tesseract();
+	String imagetest = image1.doOCR(new File("C:\\Users\\91991\\eclipse-workspace\\Tender\\Screenshot\\Captcha1.png"));
+	String captcha = imagetest.replaceAll("[^a-z0-9A-Z]", "");
+	System.out.println(captcha);
+	driver.findElement(By.id("CaptchaText")).sendKeys(captcha);
+		}catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
 	public static void currentUrl() {
 		driver.getCurrentUrl();
 
