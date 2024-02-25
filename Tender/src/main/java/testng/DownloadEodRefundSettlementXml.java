@@ -111,7 +111,7 @@ public class DownloadEodRefundSettlementXml {
 		reader.addColumn("EmdRefundSettlementStatus", "EMD");
 		reader.addColumn("EmdRefundSettlementStatus", "Refund");
 		reader.addColumn("EmdRefundSettlementStatus", "Settlement");
-		
+	
 					
 		for (int i = 2; i <= 2; i++) {
 	    String date = "xmlFileName";
